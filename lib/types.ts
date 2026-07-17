@@ -1,0 +1,49 @@
+// lib/types.ts
+
+export type MeetingType =
+  | "testimony"
+  | "regular"
+  | "stake"
+  | "general";
+
+export type SpeakerType = "speaker" | "musical-number";
+
+export interface Hymn {
+  number: number;
+  title: string;
+}
+
+export interface SpeakerItem {
+  name: string;
+  topic: string;
+  type: SpeakerType;
+}
+
+export interface WardBusinessItem {
+  description: string;
+}
+
+export interface SacramentMeeting {
+  id: number;
+  date: string; // ISO format: YYYY-MM-DD
+
+  meetingType: MeetingType;
+
+  presiding: string;
+  conducting: string;
+
+  announcements?: string[];
+
+  openingHymn: Hymn;
+  openingPrayer: string;
+
+  wardBusiness: WardBusinessItem[];
+  stakeBusiness: boolean;
+
+  sacramentHymn: Hymn;
+
+  speakers: SpeakerItem[];
+
+  closingHymn: Hymn;
+  closingPrayer: string;
+}
