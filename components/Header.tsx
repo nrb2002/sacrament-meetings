@@ -18,7 +18,7 @@ export default function Header() {
             href="/"
             className="text-2xl font-bold text-blue-700"
           >
-            Sacrament Meetings
+            Sacrament Meetings Planner
           </Link>
 
           <p className="text-sm text-gray-600">
