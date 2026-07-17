@@ -11,7 +11,7 @@ const links = [
     label: "Home",
   },
   {
-    href: "/past",
+    href: "/meetings/past",
     label: "Past Meetings",
   },
   {

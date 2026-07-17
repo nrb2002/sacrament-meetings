@@ -1,11 +1,27 @@
 // meetings/page.tsx
 
 import MeetingCard from "@/components/MeetingCard";
-import { getMeetings } from "@/lib/meetings-db";
+// import { getMeetings } from "@/lib/meetings-db";
+import type { SacramentMeeting } from "@/lib/types";
 
-export default function MeetingsPage() {
-  const meetings = getMeetings();
-  
+async function fetchMeetings() {
+  const response = await fetch(
+    "http://localhost:3000/api/meetings",
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Unable to load meetings: ${response.status}`
+    );
+  }
+  return response.json() as Promise<SacramentMeeting[]>;
+}
+
+export default async function MeetingsPage() {
+  const meetings = await fetchMeetings();  
 
   return (
     <>
