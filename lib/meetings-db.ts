@@ -1,12 +1,11 @@
 // lib/meetings-db.ts
 
-/*
-In-memory data module, holding at least five meeting records and exports query functions.
-
-*/
-
 import type { SacramentMeeting } from "./types";
 
+/**
+ * Temporary in-memory data store.
+ * This will be replaced with a database in a future assignment.
+ */
 const meetings: SacramentMeeting[] = [
   {
     id: 1,
@@ -187,9 +186,9 @@ const meetings: SacramentMeeting[] = [
 ];
 
 /**
- * Returns all meetings or those for a specific date.
+ * Returns all meetings or meetings for a specific date.
  */
-export function getMeetings(date?: string | null): SacramentMeeting[] {
+export function getMeetings(date?: string): SacramentMeeting[] {
   if (date) {
     return meetings.filter((meeting) => meeting.date === date);
   }
@@ -198,14 +197,26 @@ export function getMeetings(date?: string | null): SacramentMeeting[] {
 }
 
 /**
- * Returns a single meeting by its id.
+ * Returns a meeting by its id.
  */
 export function getMeetingById(id: number): SacramentMeeting | null {
   return meetings.find((meeting) => meeting.id === id) ?? null;
 }
 
 /**
- * Returns the meeting for today's date, if one exists.
+ * Returns all meetings before today.
+ * Sorted newest first.
+ */
+export function getPastMeetings(): SacramentMeeting[] {
+  const today = new Date().toISOString().split("T")[0];
+
+  return meetings
+    .filter((meeting) => meeting.date < today)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+/**
+ * Returns today's meeting.
  */
 export function getCurrentMeeting(): SacramentMeeting | null {
   const today = new Date().toISOString().split("T")[0];
@@ -214,13 +225,28 @@ export function getCurrentMeeting(): SacramentMeeting | null {
 }
 
 /**
- * Placeholder mutation functions for future assignments.
+ * Returns all meetings after today.
+ * Sorted nearest first.
+ */
+export function getFutureMeetings(): SacramentMeeting[] {
+  const today = new Date().toISOString().split("T")[0];
+
+  return meetings
+    .filter((meeting) => meeting.date > today)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/**
+ * Adds a new meeting.
  */
 export function addMeeting(meeting: SacramentMeeting): SacramentMeeting {
   meetings.push(meeting);
   return meeting;
 }
 
+/**
+ * Updates an existing meeting.
+ */
 export function updateMeeting(
   id: number,
   updatedMeeting: SacramentMeeting
@@ -236,6 +262,9 @@ export function updateMeeting(
   return updatedMeeting;
 }
 
+/**
+ * Deletes a meeting.
+ */
 export function deleteMeeting(id: number): boolean {
   const index = meetings.findIndex((meeting) => meeting.id === id);
 

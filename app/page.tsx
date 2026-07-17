@@ -12,14 +12,15 @@ export default function HomePage() {
 
           <p className="mt-4 text-gray-600">
             View upcoming sacrament meeting programs,
-            speakers, hymns, and announcements.
+            speakers, hymns, announcements, and ward business.
           </p>
 
           <Link
             href="/meetings"
             className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-red-700"
           >
-            View Meetings
+            View all meetings
+
           </Link>
         </div>
 
