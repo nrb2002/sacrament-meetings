@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import MeetingDetail from "@/components/MeetingDetail";
 import { getMeetingById } from "@/lib/meetings-db";
 
+import MeetingActions from "@/components/MeetingActions";
+
+
 interface PageProps {
   params: Promise<{
     id: string;
@@ -22,5 +25,10 @@ export default async function MeetingPage({
     notFound();
   }
 
-  return <MeetingDetail meeting={meeting} />;
+  return (
+    <>
+      <MeetingActions />
+      <MeetingDetail meeting={meeting} />
+    </>
+  );
 }
