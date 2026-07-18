@@ -27,11 +27,15 @@ body {
 
 @media print {
 
-  header,
+  .site-header,
   footer,
   nav,
   button {
     display: none !important;
+  }
+
+  .meeting-header {
+    display: block !important;
   }
 
   body {
