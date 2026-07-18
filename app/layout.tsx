@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google";
+import { EB_Garamond, Source_Sans_3 } from "next/font/google";
 
 import "./globals.css";
 
@@ -11,6 +11,12 @@ const ebGaramond = EB_Garamond({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-eb-garamond",
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-source-sans-3",
 });
 
 export const metadata: Metadata = {
