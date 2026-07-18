@@ -11,8 +11,8 @@ const meetings: SacramentMeeting[] = [
     id: 1,
     date: "2026-05-03",
     meetingType: "regular",
-    presiding: "Bishop Smith",
-    conducting: "Brother Jones",
+    presiding: "Bishop Ntumba",
+    conducting: "Brother Matubu",
     announcements: ["Ward temple night: May 10"],
     openingHymn: {
       number: 2,
@@ -52,8 +52,8 @@ const meetings: SacramentMeeting[] = [
     id: 2,
     date: "2026-06-07",
     meetingType: "testimony",
-    presiding: "Bishop Smith",
-    conducting: "Brother Jones",
+    presiding: "Bishop Ntumba",
+    conducting: "Brother Matubu",
     announcements: ["Fast offering donations after the meeting"],
     openingHymn: {
       number: 19,
@@ -71,21 +71,21 @@ const meetings: SacramentMeeting[] = [
       number: 85,
       title: "How Firm a Foundation",
     },
-    closingPrayer: "Sister Clark",
+    closingPrayer: "Sister Lengelo",
   },
 
   {
     id: 3,
     date: "2026-07-05",
     meetingType: "regular",
-    presiding: "Bishop Smith",
-    conducting: "Brother Adams",
+    presiding: "Bishop Ntumba",
+    conducting: "Brother Matubu",
     announcements: ["Youth conference registration is open"],
     openingHymn: {
       number: 98,
       title: "I Need Thee Every Hour",
     },
-    openingPrayer: "Sister Hall",
+    openingPrayer: "Sister Konga",
     wardBusiness: [
       {
         description: "Release of Sunday School presidency",
@@ -124,14 +124,14 @@ const meetings: SacramentMeeting[] = [
     id: 4,
     date: "2026-08-02",
     meetingType: "stake",
-    presiding: "President Johnson",
-    conducting: "President Johnson",
+    presiding: "President Nday",
+    conducting: "President Mutala",
     announcements: ["Stake conference begins at 10:00 AM"],
     openingHymn: {
       number: 3,
       title: "Now Let Us Rejoice",
     },
-    openingPrayer: "Brother Carter",
+    openingPrayer: "Brother Mubenga",
     wardBusiness: [],
     stakeBusiness: true,
     sacramentHymn: {
@@ -140,8 +140,8 @@ const meetings: SacramentMeeting[] = [
     },
     speakers: [
       {
-        name: "President Johnson",
-        topic: "Building Zion",
+        name: "President Nday",
+        topic: "Strengthening Our Families",
         type: "speaker",
       },
     ],
@@ -156,14 +156,14 @@ const meetings: SacramentMeeting[] = [
     id: 5,
     date: "2026-09-06",
     meetingType: "general",
-    presiding: "Bishop Smith",
-    conducting: "Brother Jones",
+    presiding: "Bishop Ntumba",
+    conducting: "Brother Tshimungu",
     announcements: ["General Conference broadcast next month"],
     openingHymn: {
       number: 1,
       title: "The Morning Breaks",
     },
-    openingPrayer: "Brother Lewis",
+    openingPrayer: "Brother Kalala",
     wardBusiness: [],
     stakeBusiness: false,
     sacramentHymn: {

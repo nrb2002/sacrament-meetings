@@ -1,16 +1,19 @@
 // meetings/page.tsx
 
+
 import MeetingCard from "@/components/MeetingCard";
 // import { getMeetings } from "@/lib/meetings-db";
 import type { SacramentMeeting } from "@/lib/types";
 
 async function fetchMeetings() {
-  const response = await fetch(
-    "http://localhost:3000/api/meetings",
-    {
-      cache: "no-store",
-    }
-  );
+  const baseUrl =
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+  const response = await fetch(`${baseUrl}/api/meetings`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error(
