@@ -154,7 +154,7 @@ const meetings: SacramentMeeting[] = [
 
   {
     id: 5,
-    date: "2026-07-18",
+    date: "2026-07-19",
     meetingType: "general",
     presiding: "Bishop Ntumba",
     conducting: "Brother Tshimungu",
