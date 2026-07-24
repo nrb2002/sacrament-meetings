@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Streaming page segments timeline</title>
+  <desc id="desc">A timeline showing page shell first, then separate chunks for fetching, rendering, loading fallback, and hydration.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #f4f7fb; }
+      .title { fill: #102a43; font: 700 24px 'Open Sans', Arial, sans-serif; }
+      .subtitle { fill: #334e68; font: 400 16px 'Open Sans', Arial, sans-serif; }
+      .lane { fill: #ffffff; stroke: #d9e2ec; stroke-width: 2; }
+      .chunkText { fill: #102a43; font: 700 15px 'Open Sans', Arial, sans-serif; }
+      .chunkSub { fill: #486581; font: 400 13px 'Open Sans', Arial, sans-serif; }
+      .label { fill: #334e68; font: 700 14px 'Open Sans', Arial, sans-serif; }
+      .tick { stroke: #9fb3c8; stroke-width: 2; }
+      .arrow { stroke: #486581; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .chunkA { fill: #dceeff; stroke: #2b6cb0; stroke-width: 2; }
+      .chunkB { fill: #e6fffa; stroke: #2c7a7b; stroke-width: 2; }
+      .chunkC { fill: #fff5e5; stroke: #b7791f; stroke-width: 2; }
+      .chunkD { fill: #f3e8ff; stroke: #6b46c1; stroke-width: 2; }
+      .shell { fill: #edf2f7; stroke: #718096; stroke-width: 2; }
+      .note { fill: #1f2937; font: 400 13px 'Open Sans', Arial, sans-serif; }
+    </style>
+
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#486581" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="420" rx="12" />
+
+  <text class="title" x="36" y="45">How Streaming Delivers the UI in Segments</text>
+  <text class="subtitle" x="36" y="72">Users see useful content early while slower sections continue loading.</text>
+
+  <rect class="lane" x="36" y="96" width="888" height="250" rx="10" />
+
+  <text class="label" x="52" y="132">Initial response</text>
+  <line class="tick" x1="210" y1="115" x2="210" y2="328" />
+  <text class="label" x="220" y="132">Streamed chunks over time</text>
+
+  <rect class="shell" x="52" y="160" width="140" height="130" rx="8" />
+  <text class="chunkText" x="67" y="195">Page Shell</text>
+  <text class="chunkSub" x="67" y="217">Header</text>
+  <text class="chunkSub" x="67" y="236">Navigation</text>
+  <text class="chunkSub" x="67" y="255">Layout frame</text>
+
+  <rect class="chunkA" x="232" y="160" width="150" height="130" rx="8" />
+  <text class="chunkText" x="248" y="195">1. Fetching</text>
+  <text class="chunkSub" x="248" y="217">Server requests</text>
+  <text class="chunkSub" x="248" y="236">data for section A</text>
+
+  <rect class="chunkB" x="406" y="160" width="150" height="130" rx="8" />
+  <text class="chunkText" x="422" y="195">2. Rendering</text>
+  <text class="chunkSub" x="422" y="217">Server renders</text>
+  <text class="chunkSub" x="422" y="236">ready HTML chunk</text>
+
+  <rect class="chunkC" x="580" y="160" width="150" height="130" rx="8" />
+  <text class="chunkText" x="597" y="195">3. Loading UI</text>
+  <text class="chunkSub" x="597" y="217">Fallback appears</text>
+  <text class="chunkSub" x="597" y="236">for slow sections</text>
+
+  <rect class="chunkD" x="754" y="160" width="150" height="130" rx="8" />
+  <text class="chunkText" x="771" y="195">4. Hydrating</text>
+  <text class="chunkSub" x="771" y="217">Client JS attaches</text>
+  <text class="chunkSub" x="771" y="236">interactivity</text>
+
+  <path class="arrow" d="M196 225 H228" />
+  <path class="arrow" d="M382 225 H402" />
+  <path class="arrow" d="M556 225 H576" />
+  <path class="arrow" d="M730 225 H750" />
+
+  <text class="note" x="36" y="378">Suspense boundaries let independent sections resolve and stream as each data dependency completes.</text>
+</svg>

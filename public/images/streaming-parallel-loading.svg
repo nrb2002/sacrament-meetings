@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="plt desc">
+  <title id="plt">Parallel component streaming timeline — portfolio example</title>
+  <desc id="desc">Three portfolio component rows (HeroSection, ProjectList, AboutSection) each independently progress through 1: Fetching data on server, 2: Rendering HTML on server, 3: Loading code on the client, and 4: Hydrating — at different rates along a shared time axis.</desc>
+
+  <defs>
+    <style>
+      .bg        { fill: #f4f7fb; }
+      .lane      { fill: #ffffff; stroke: #d9e2ec; stroke-width: 2; }
+      .title     { fill: #102a43; font: 700 24px 'Open Sans', Arial, sans-serif; }
+      .subtitle  { fill: #334e68; font: 400 16px 'Open Sans', Arial, sans-serif; }
+      .label     { fill: #334e68; font: 700 14px 'Open Sans', Arial, sans-serif; }
+      .rowlabel  { fill: #334e68; font: 700 14px 'Open Sans', Arial, sans-serif; text-anchor: end; }
+      .tick      { stroke: #9fb3c8; stroke-width: 2; }
+      .arrow     { stroke: #486581; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead2); }
+      .chunkNum  { fill: #102a43; font: 700 15px 'Open Sans', Arial, sans-serif; }
+      .chunkA    { fill: #dceeff; stroke: #2b6cb0; stroke-width: 2; }
+      .chunkB    { fill: #e6fffa; stroke: #2c7a7b; stroke-width: 2; }
+      .chunkC    { fill: #fff5e5; stroke: #b7791f; stroke-width: 2; }
+      .chunkD    { fill: #f3e8ff; stroke: #6b46c1; stroke-width: 2; }
+      .note      { fill: #1f2937; font: 400 13px 'Open Sans', Arial, sans-serif; }
+    </style>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#486581" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="420" rx="12" />
+
+  <text class="title" x="36" y="45">Components Stream in Parallel</text>
+  <text class="subtitle" x="36" y="72">Each component independently fetches, renders, loads, and hydrates at its own pace.</text>
+
+  <rect class="lane" x="36" y="90" width="888" height="296" rx="10" />
+
+  <!-- "Row labels" column header and time axis -->
+  <text class="label" x="52" y="124">Component</text>
+  <line class="tick" x1="218" y1="108" x2="218" y2="358" />
+  <line class="arrow" x1="226" y1="118" x2="908" y2="118" />
+  <text class="label" x="230" y="113">Time</text>
+
+  <!-- Row labels -->
+  <text class="rowlabel" x="213" y="178">HeroSection</text>
+  <text class="rowlabel" x="213" y="248">ProjectList</text>
+  <text class="rowlabel" x="213" y="318">AboutSection</text>
+
+  <!-- ── Row 1: HeroSection (fast fetch) ── -->
+  <rect class="chunkA" x="226" y="156" width="80"  height="44" rx="8" />
+  <text class="chunkNum" x="266" y="183" text-anchor="middle">1</text>
+
+  <rect class="chunkB" x="314" y="156" width="150" height="44" rx="8" />
+  <text class="chunkNum" x="389" y="183" text-anchor="middle">2</text>
+
+  <rect class="chunkC" x="472" y="156" width="140" height="44" rx="8" />
+  <text class="chunkNum" x="542" y="183" text-anchor="middle">3</text>
+
+  <rect class="chunkD" x="620" y="156" width="90"  height="44" rx="8" />
+  <text class="chunkNum" x="665" y="183" text-anchor="middle">4</text>
+
+  <!-- ── Row 2: ProjectList (slow DB fetch) ── -->
+  <rect class="chunkA" x="226" y="226" width="280" height="44" rx="8" />
+  <text class="chunkNum" x="366" y="253" text-anchor="middle">1</text>
+
+  <rect class="chunkB" x="514" y="226" width="90"  height="44" rx="8" />
+  <text class="chunkNum" x="559" y="253" text-anchor="middle">2</text>
+
+  <rect class="chunkC" x="612" y="226" width="120" height="44" rx="8" />
+  <text class="chunkNum" x="672" y="253" text-anchor="middle">3</text>
+
+  <rect class="chunkD" x="740" y="226" width="90"  height="44" rx="8" />
+  <text class="chunkNum" x="785" y="253" text-anchor="middle">4</text>
+
+  <!-- ── Row 3: AboutSection (medium fetch) ── -->
+  <rect class="chunkA" x="226" y="296" width="170" height="44" rx="8" />
+  <text class="chunkNum" x="311" y="323" text-anchor="middle">1</text>
+
+  <rect class="chunkB" x="404" y="296" width="120" height="44" rx="8" />
+  <text class="chunkNum" x="464" y="323" text-anchor="middle">2</text>
+
+  <rect class="chunkC" x="532" y="296" width="120" height="44" rx="8" />
+  <text class="chunkNum" x="592" y="323" text-anchor="middle">3</text>
+
+  <rect class="chunkD" x="660" y="296" width="90"  height="44" rx="8" />
+  <text class="chunkNum" x="705" y="323" text-anchor="middle">4</text>
+
+  <text class="note" x="36" y="410">Suspense boundaries let each component resolve independently — ProjectList waits for the database while HeroSection is already interactive.</text>
+</svg>
