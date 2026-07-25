@@ -5,8 +5,8 @@ import MeetingCard from "@/components/MeetingCard";
 
 import { getPastMeetings } from "@/lib/meetings-db";
 
-export default function PastMeetingsPage() {
-  const meetings = getPastMeetings();
+export default async function PastMeetingsPage() {
+  const meetings = await getPastMeetings();
 
   if (meetings.length === 0) {
     return (
