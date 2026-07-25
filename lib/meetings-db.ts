@@ -186,11 +186,10 @@ import type { SacramentMeeting } from "./types";
 //   },
 // ];
 
-
-
+// Database connection using Neon. The connection string is stored in the DATABASE_URL environment variable.
 const sql = neon(process.env.DATABASE_URL!);
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 /**
  * Returns a paginated list of meetings.
@@ -203,6 +202,7 @@ const ITEMS_PER_PAGE = 5;
  *
  * Results are ordered from newest to oldest.
  */
+
 export async function getMeetings(
   query: string = "",
   currentPage: number = 1
@@ -215,15 +215,15 @@ export async function getMeetings(
       id,
       to_char(date, 'YYYY-MM-DD') AS "date",
       meeting_type AS "meetingType",
-      presiding,
-      conducting,
-      announcements,
+      presiding AS "presiding",
+      conducting AS "conducting",
+      announcements AS "announcements",
       opening_hymn AS "openingHymn",
       opening_prayer AS "openingPrayer",
       ward_business AS "wardBusiness",
       stake_business AS "stakeBusiness",
       sacrament_hymn AS "sacramentHymn",
-      speakers,
+      speakers AS "speakers",
       closing_hymn AS "closingHymn",
       closing_prayer AS "closingPrayer"
     FROM meetings
@@ -276,15 +276,15 @@ export async function getMeetingById(
       id,
       to_char(date, 'YYYY-MM-DD') AS "date",
       meeting_type AS "meetingType",
-      presiding,
-      conducting,
-      announcements,
+      presiding AS "presiding",
+      conducting AS "conducting",
+      announcements AS "announcements",
       opening_hymn AS "openingHymn",
       opening_prayer AS "openingPrayer",
       ward_business AS "wardBusiness",
       stake_business AS "stakeBusiness",
       sacrament_hymn AS "sacramentHymn",
-      speakers,
+      speakers AS "speakers",
       closing_hymn AS "closingHymn",
       closing_prayer AS "closingPrayer"
     FROM meetings
@@ -295,16 +295,104 @@ export async function getMeetingById(
 }
 
 /**
+ * Returns today's meeting, if one exists.
+ * 
+ * Returns null if there is no meeting scheduled for today.
+ */
+export async function getCurrentMeeting(): Promise<SacramentMeeting | null> {
+  const rows = await sql`
+    SELECT
+      id,
+      to_char(date, 'YYYY-MM-DD') AS "date",
+      meeting_type AS "meetingType",
+      presiding AS "presiding",
+      conducting AS "conducting",
+      announcements AS "announcements",
+      opening_hymn AS "openingHymn",
+      opening_prayer AS "openingPrayer",
+      ward_business AS "wardBusiness",
+      stake_business AS "stakeBusiness",
+      sacrament_hymn AS "sacramentHymn",
+      speakers AS "speakers",
+      closing_hymn AS "closingHymn",
+      closing_prayer AS "closingPrayer"
+    FROM meetings
+    WHERE date = CURRENT_DATE
+  `;
+
+  return (rows[0] as unknown as SacramentMeeting) ?? null;
+}
+
+/**
+ * Returns all past meetings, ordered from newest to oldest. 
+ */
+export async function getPastMeetings(): Promise<SacramentMeeting[]> {
+  const rows = await sql`
+    SELECT
+      id,
+      to_char(date, 'YYYY-MM-DD') AS "date",
+      meeting_type AS "meetingType",
+      presiding AS "presiding",
+      conducting AS "conducting",
+      announcements AS "announcements",
+      opening_hymn AS "openingHymn",
+      opening_prayer AS "openingPrayer",
+      ward_business AS "wardBusiness",
+      stake_business AS "stakeBusiness",
+      sacrament_hymn AS "sacramentHymn",
+      speakers AS "speakers",
+      closing_hymn AS "closingHymn",
+      closing_prayer AS "closingPrayer"
+    FROM meetings
+    WHERE date < CURRENT_DATE
+    ORDER BY date DESC
+  `;
+
+  return rows as unknown as SacramentMeeting[];
+}
+
+/**
+ * Returns all future meetings, ordered from soonest to latest.
+ */
+export async function getFutureMeetings(): Promise<SacramentMeeting[]> {
+  const rows = await sql`
+    SELECT
+      id,
+      to_char(date, 'YYYY-MM-DD') AS "date",
+      meeting_type AS "meetingType",
+      presiding AS "presiding",
+      conducting AS "conducting",
+      announcements AS "announcements",
+      opening_hymn AS "openingHymn",
+      opening_prayer AS "openingPrayer",
+      ward_business AS "wardBusiness",
+      stake_business AS "stakeBusiness",
+      sacrament_hymn AS "sacramentHymn",
+      speakers AS "speakers",
+      closing_hymn AS "closingHymn",
+      closing_prayer AS "closingPrayer"
+    FROM meetings
+    WHERE date > CURRENT_DATE
+    ORDER BY date ASC
+  `;
+
+  return rows as unknown as SacramentMeeting[];
+}
+
+
+
+/**************************************************************************
  * Mutation stubs.
  *
- * These will be connected to the database in Week 04
- * when forms and administrative functionality are added.
- */
+ * These are to be connected to the database when forms and administrative functionality are added.
+ * 
+ **************************************************************************/
+
 export async function addMeeting(
   data: Omit<SacramentMeeting, "id">
 ): Promise<SacramentMeeting> {
   throw new Error(
-    "addMeeting: database implementation coming in Week 04"
+    "addMeeting: database implementation coming up soon!"
   );
 }
 
@@ -313,7 +401,7 @@ export async function updateMeeting(
   updates: Partial<SacramentMeeting>
 ): Promise<SacramentMeeting | null> {
   throw new Error(
-    "updateMeeting: database implementation coming in Week 04"
+    "updateMeeting: database implementation coming up soon!"
   );
 }
 
@@ -321,6 +409,6 @@ export async function deleteMeeting(
   id: number
 ): Promise<boolean> {
   throw new Error(
-    "deleteMeeting: database implementation coming in Week 04"
+    "deleteMeeting: database implementation coming up soon!"
   );
 }

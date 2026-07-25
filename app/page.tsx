@@ -7,12 +7,11 @@ export default function HomePage() {
       <div className="grid items-center gap-8 md:grid-cols-2">
         <div>
           <h1 className="text-4xl font-bold">
-            Sacrament Meetings
+            Your Sacrament Meetings App
           </h1>
 
           <p className="mt-4 text-gray-600">
-            View upcoming sacrament meeting programs,
-            speakers, hymns, announcements, and ward business.
+            View past, current, and future sacrament meeting programs, speakers, hymns, announcements, and ward business.
           </p>
 
           <Link

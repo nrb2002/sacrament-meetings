@@ -1,12 +1,12 @@
-// app/meetings/upcoming/page.tsx
+// app/(public)/meetings/future/page.tsx
 
 import EmptyState from "@/components/EmptyState";
 import MeetingCard from "@/components/MeetingCard";
 
 import { getFutureMeetings } from "@/lib/meetings-db";
 
-export default function FutureMeetingsPage() {
-  const meetings = getFutureMeetings();
+export default async function FutureMeetingsPage() {
+  const meetings = await getFutureMeetings();
 
   if (meetings.length === 0) {
     return (

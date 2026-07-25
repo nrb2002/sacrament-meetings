@@ -1,3 +1,5 @@
+// app/(public)/meetings/layout.tsx
+
 import type { ReactNode } from "react";
 
 //import NavLinks from "@/components/NavLinks";

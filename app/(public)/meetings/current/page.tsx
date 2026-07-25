@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import EmptyState from "@/components/EmptyState";
 import { getCurrentMeeting } from "@/lib/meetings-db";
 
-export default function CurrentMeetingPage() {
-  const meeting = getCurrentMeeting();
+export default async function CurrentMeetingPage() {
+  const meeting = await getCurrentMeeting();
 
   if (!meeting) {
     return (

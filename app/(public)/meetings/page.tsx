@@ -1,10 +1,10 @@
-// app/meetings/page.tsx
+// app/(public)/meetings/page.tsx
 
 import MeetingCard from "@/components/MeetingCard";
 import { getMeetings } from "@/lib/meetings-db";
 
-export default function MeetingsPage() {
-  const meetings = getMeetings();
+export default async function MeetingsPage() {
+  const meetings = await getMeetings();
 
   return (
     <>
@@ -12,7 +12,7 @@ export default function MeetingsPage() {
         All Meetings
       </h1>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {meetings.map((meeting) => (
           <MeetingCard
             key={meeting.id}

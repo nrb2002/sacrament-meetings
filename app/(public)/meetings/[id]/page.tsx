@@ -20,7 +20,7 @@ export default async function MeetingPage({
 }: PageProps) {
   const { id } = await params;
 
-  const meeting = getMeetingById(Number(id));
+  const meeting = await getMeetingById(Number(id));
 
   if (!meeting) {
     notFound();
