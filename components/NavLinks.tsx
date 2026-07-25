@@ -45,8 +45,8 @@ export default function NavLinks() {
               href={link.href}
               className={`transition-colors ${
                 isActive
-                  ? "font-semibold text-blue-600"
-                  : "text-gray-700 hover:text-blue-600"
+                  ? "font-semibold text-red-600"
+                  : "text-gray-700 hover:text-red-600"
               }`}
             >
               {link.label}
