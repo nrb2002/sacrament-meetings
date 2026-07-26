@@ -1,4 +1,4 @@
-// meetings/loading.tsx
+// /admin/meetings/loading.tsx
 
 export default function Loading() {
   return (
