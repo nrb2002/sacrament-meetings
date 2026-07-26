@@ -11,7 +11,7 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-4 text-gray-600">
-            View past, current, and future sacrament meeting programs, speakers, hymns, announcements, and ward business.
+            View past, current, and future sacrament meeting programs. This web app helps you explore and manage information like speakers, hymns, announcements, ward business, Etc.
           </p>
 
           <Link
