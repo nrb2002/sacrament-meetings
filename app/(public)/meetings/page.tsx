@@ -1,35 +1,41 @@
-// app/(admin)/admin/meetings/page.tsx
-
-import Link from "next/link";
+// app/(public)/meetings/page.tsx
 
 import MeetingCard from "@/components/MeetingCard";
-import { getMeetings } from "@/lib/meetings-db";
+import { MeetingSearch } from "@/components/MeetingSearch";
+import Pagination from "@/components/Pagination";
 
-export const dynamic = "force-dynamic";
+import {
+  getMeetings,
+  getMeetingsTotalPages,
+} from "@/lib/meetings-db";
 
-export default async function AdminMeetingsPage() {
-  const meetings = await getMeetings("", 1);
+interface MeetingsPageProps {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+}
+
+export default async function MeetingsPage({
+  searchParams,
+}: MeetingsPageProps) {
+  const params = await searchParams;
+
+  const query = params?.query ?? "";
+  const currentPage = Number(params?.page) || 1;
+
+  const [meetings, totalPages] = await Promise.all([
+    getMeetings(query, currentPage),
+    getMeetingsTotalPages(query),
+  ]);
 
   return (
     <>
-      <div className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">
-            Manage Meetings
-          </h1>
+      <h1 className="mb-8 text-3xl font-bold">
+        All Meetings
+      </h1>
 
-          <p className="mt-2 text-gray-600">
-            View and manage sacrament meeting programs.
-          </p>
-        </div>
-
-        <Link
-          href="/admin/meetings/new"
-          className="rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
-        >
-          Create Meeting
-        </Link>
-      </div>
+      <MeetingSearch />
 
       {meetings.length === 0 ? (
         <p className="py-12 text-center text-gray-600">
@@ -44,6 +50,10 @@ export default async function AdminMeetingsPage() {
             />
           ))}
         </div>
+      )}
+
+      {totalPages > 1 && (
+        <Pagination totalPages={totalPages} />
       )}
     </>
   );
