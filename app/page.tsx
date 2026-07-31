@@ -6,12 +6,12 @@ export default function HomePage() {
     <section className="space-y-8">
       <div className="grid items-center gap-8 md:grid-cols-2">
         <div>
-          <h1 className="text-4xl font-bold">
-            Your Sacrament Meetings App
-          </h1>
+          <h1 className="text-4xl font-bold">Your Sacrament Meetings App</h1>
 
           <p className="mt-4 text-gray-600">
-            View past, current, and future sacrament meeting programs. This web app helps you explore and manage information like speakers, hymns, announcements, ward business, Etc.
+            View past, current, and future sacrament meeting programs. This web
+            app helps you explore and manage information like speakers, hymns,
+            announcements, ward business, Etc.
           </p>
 
           <Link
@@ -19,7 +19,6 @@ export default function HomePage() {
             className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-red-700"
           >
             View all meetings
-
           </Link>
         </div>
 

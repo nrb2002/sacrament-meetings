@@ -1,10 +1,7 @@
 // lib/types.ts
 
 export type MeetingType =
-  | "testimony"
-  | "regular"
-  | "stake"
-  | "general";
+  "testimony" | "regular" | "stake" | "general" | "special";
 
 export type SpeakerType = "speaker" | "musical-number";
 

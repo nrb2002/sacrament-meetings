@@ -8,16 +8,12 @@ interface MeetingsLayoutProps {
   children: ReactNode;
 }
 
-export default function MeetingsLayout({
-  children,
-}: MeetingsLayoutProps) {
+export default function MeetingsLayout({ children }: MeetingsLayoutProps) {
   return (
     <>
       {/* <NavLinks /> */}
 
-      <section className="mt-2">
-        {children}
-      </section>
+      <section className="mt-2">{children}</section>
     </>
   );
 }

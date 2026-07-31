@@ -7,17 +7,13 @@ import { getMeetingById } from "@/lib/meetings-db";
 
 import MeetingActions from "@/components/MeetingActions";
 
-
-
 interface PageProps {
   params: Promise<{
     id: string;
   }>;
 }
 
-export default async function MeetingPage({
-  params,
-}: PageProps) {
+export default async function MeetingPage({ params }: PageProps) {
   const { id } = await params;
 
   const meeting = await getMeetingById(Number(id));
@@ -27,7 +23,7 @@ export default async function MeetingPage({
   }
 
   return (
-    <>      
+    <>
       <MeetingActions />
       <MeetingDetail meeting={meeting} />
     </>

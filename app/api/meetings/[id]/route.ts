@@ -10,10 +10,7 @@ interface RouteContext {
   }>;
 }
 
-export async function GET(
-  request: Request,
-  { params }: RouteContext
-) {
+export async function GET(request: Request, { params }: RouteContext) {
   const { id } = await params;
 
   const meetingId = Number(id);
@@ -25,7 +22,7 @@ export async function GET(
       },
       {
         status: 400,
-      }
+      },
     );
   }
 
@@ -38,7 +35,7 @@ export async function GET(
       },
       {
         status: 404,
-      }
+      },
     );
   }
 
