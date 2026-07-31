@@ -14,10 +14,7 @@ export default function Header() {
     <header className="site-header border-b bg-white shadow-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <div>
-          <Link
-            href="/"
-            className="text-2xl font-bold text-blue-700"
-          >
+          <Link href="/" className="text-2xl font-bold text-blue-700">
             Sacrament Meeting Planner
           </Link>
 
@@ -26,9 +23,7 @@ export default function Header() {
           </p>
         </div>
 
-        <p className="text-sm text-gray-500">
-          {today}
-        </p>
+        <p className="text-sm text-gray-500">{today}</p>
       </div>
     </header>
   );

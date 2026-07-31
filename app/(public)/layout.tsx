@@ -6,8 +6,6 @@ interface PublicLayoutProps {
   children: ReactNode;
 }
 
-export default function PublicLayout({
-  children,
-}: PublicLayoutProps) {
+export default function PublicLayout({ children }: PublicLayoutProps) {
   return <>{children}</>;
 }

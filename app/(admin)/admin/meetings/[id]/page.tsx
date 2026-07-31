@@ -30,9 +30,7 @@ export default async function AdminMeetingPage({
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">
-          Manage Meeting
-        </h1>
+        <h1 className="text-3xl font-bold">Manage Meeting</h1>
 
         <p className="mt-2 text-gray-600">
           View and manage this sacrament meeting.

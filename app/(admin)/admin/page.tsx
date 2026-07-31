@@ -14,9 +14,7 @@ export default async function AdminMeetingsPage() {
     <>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">
-            Manage Meetings
-          </h1>
+          <h1 className="text-3xl font-bold">Manage Meetings</h1>
 
           <p className="mt-2 text-gray-600">
             View and manage sacrament meeting programs.
@@ -32,16 +30,11 @@ export default async function AdminMeetingsPage() {
       </div>
 
       {meetings.length === 0 ? (
-        <p className="py-12 text-center text-gray-600">
-          No meetings found.
-        </p>
+        <p className="py-12 text-center text-gray-600">No meetings found.</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {meetings.map((meeting) => (
-            <MeetingCard
-              key={meeting.id}
-              meeting={meeting}
-            />
+            <MeetingCard key={meeting.id} meeting={meeting} />
           ))}
         </div>
       )}

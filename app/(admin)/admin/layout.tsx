@@ -7,21 +7,15 @@ interface AdminLayoutProps {
   children: ReactNode;
 }
 
-export default function AdminLayout({
-  children,
-}: AdminLayoutProps) {
+export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <section>
       <div className="mb-8 border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">
-              Admin Dashboard
-            </h1>
+            <h1 className="text-xl font-bold text-gray-900">Admin Dashboard</h1>
 
-            <p className="text-sm text-gray-500">
-              Sacrament Meeting Planner
-            </p>
+            <p className="text-sm text-gray-500">Sacrament Meeting Planner</p>
           </div>
 
           <nav className="flex gap-4 text-sm font-medium">
@@ -49,9 +43,7 @@ export default function AdminLayout({
         </div>
       </div>
 
-      <main className="mx-auto max-w-6xl px-6 py-8">
-        {children}
-      </main>
+      <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
     </section>
   );
 }

@@ -4,10 +4,7 @@ import MeetingCard from "@/components/MeetingCard";
 import { MeetingSearch } from "@/components/MeetingSearch";
 import Pagination from "@/components/Pagination";
 
-import {
-  getMeetings,
-  getMeetingsTotalPages,
-} from "@/lib/meetings-db";
+import { getMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
 
 interface MeetingsPageProps {
   searchParams?: Promise<{
@@ -31,30 +28,21 @@ export default async function MeetingsPage({
 
   return (
     <>
-      <h1 className="mb-8 text-3xl font-bold">
-        All Meetings
-      </h1>
+      <h1 className="mb-8 text-3xl font-bold">All Meetings</h1>
 
       <MeetingSearch />
 
       {meetings.length === 0 ? (
-        <p className="py-12 text-center text-gray-600">
-          No meetings found.
-        </p>
+        <p className="py-12 text-center text-gray-600">No meetings found.</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {meetings.map((meeting) => (
-            <MeetingCard
-              key={meeting.id}
-              meeting={meeting}
-            />
+            <MeetingCard key={meeting.id} meeting={meeting} />
           ))}
         </div>
       )}
 
-      {totalPages > 1 && (
-        <Pagination totalPages={totalPages} />
-      )}
+      {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </>
   );
 }

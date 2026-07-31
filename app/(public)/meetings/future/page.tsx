@@ -19,16 +19,11 @@ export default async function FutureMeetingsPage() {
 
   return (
     <>
-      <h1 className="mb-8 text-3xl font-bold">
-        Future Meetings
-      </h1>
+      <h1 className="mb-8 text-3xl font-bold">Future Meetings</h1>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {meetings.map((meeting) => (
-          <MeetingCard
-            key={meeting.id}
-            meeting={meeting}
-          />
+          <MeetingCard key={meeting.id} meeting={meeting} />
         ))}
       </div>
     </>

@@ -187,6 +187,7 @@ import type { SacramentMeeting } from "./types";
 // ];
 
 // Database connection using Neon. The connection string is stored in the DATABASE_URL environment variable.
+
 const sql = neon(process.env.DATABASE_URL!);
 
 const ITEMS_PER_PAGE = 6;
@@ -205,7 +206,7 @@ const ITEMS_PER_PAGE = 6;
 
 export async function getMeetings(
   query: string = "",
-  currentPage: number = 1
+  currentPage: number = 1,
 ): Promise<SacramentMeeting[]> {
   const searchTerm = `%${query}%`;
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -246,7 +247,7 @@ export async function getMeetings(
  * Five meetings are displayed per page.
  */
 export async function getMeetingsTotalPages(
-  query: string = ""
+  query: string = "",
 ): Promise<number> {
   const searchTerm = `%${query}%`;
 
@@ -269,7 +270,7 @@ export async function getMeetingsTotalPages(
  * Returns a single meeting by ID.
  */
 export async function getMeetingById(
-  id: number
+  id: number,
 ): Promise<SacramentMeeting | null> {
   const rows = await sql`
     SELECT
@@ -296,7 +297,7 @@ export async function getMeetingById(
 
 /**
  * Returns today's meeting, if one exists.
- * 
+ *
  * Returns null if there is no meeting scheduled for today.
  */
 export async function getCurrentMeeting(): Promise<SacramentMeeting | null> {
@@ -324,7 +325,7 @@ export async function getCurrentMeeting(): Promise<SacramentMeeting | null> {
 }
 
 /**
- * Returns all past meetings, ordered from newest to oldest. 
+ * Returns all past meetings, ordered from newest to oldest.
  */
 export async function getPastMeetings(): Promise<SacramentMeeting[]> {
   const rows = await sql`
@@ -379,36 +380,125 @@ export async function getFutureMeetings(): Promise<SacramentMeeting[]> {
   return rows as unknown as SacramentMeeting[];
 }
 
-
-
 /**************************************************************************
  * Mutation stubs.
  *
  * These are to be connected to the database when forms and administrative functionality are added.
- * 
+ *
  **************************************************************************/
 
 export async function addMeeting(
-  data: Omit<SacramentMeeting, "id">
+  data: Omit<SacramentMeeting, "id">,
 ): Promise<SacramentMeeting> {
-  throw new Error(
-    "addMeeting: database implementation coming up soon!"
-  );
+  const rows = await sql`
+  INSERT INTO meetings(
+    date,
+    meeting_type,
+    presiding,
+    conducting,
+    announcements,
+    opening_hymn,
+    opening_prayer,
+    ward_business,
+    stake_business,
+    sacrament_hymn,
+    speakers,
+    closing_hymn,
+    closing_prayer
+  )
+  VALUES (
+    ${data.date},
+    ${data.meetingType},
+    ${data.presiding},
+    ${data.conducting},
+    ${data.announcements},
+    ${JSON.stringify(data.openingHymn)},
+    ${data.openingPrayer},
+    ${JSON.stringify(data.wardBusiness)},
+    ${data.stakeBusiness},
+    ${JSON.stringify(data.sacramentHymn)},
+    ${JSON.stringify(data.speakers)},
+    ${JSON.stringify(data.closingHymn)},
+    ${data.closingPrayer}
+  )
+  RETURNING
+    id,
+    to_char(date, 'YYYY-MM-DD') AS "date",
+    meeting_type AS "meetingType",
+    presiding,
+    conducting,
+    announcements,
+    opening_hymn AS "openingHymn",
+    opening_prayer AS "openingPrayer",
+    ward_business AS "wardBusiness",
+    stake_business AS "stakeBusiness",
+    sacrament_hymn AS "sacramentHymn",
+    speakers,
+    closing_hymn AS "closingHymn",
+    closing_prayer AS "closingPrayer"
+  `;
+
+  return rows[0] as unknown as SacramentMeeting;
 }
 
 export async function updateMeeting(
   id: number,
-  updates: Partial<SacramentMeeting>
+  updates: Partial<SacramentMeeting>,
 ): Promise<SacramentMeeting | null> {
-  throw new Error(
-    "updateMeeting: database implementation coming up soon!"
-  );
+  const existing = await getMeetingById(id);
+
+  if (!existing) {
+    return null;
+  }
+
+  const meeting = {
+    ...existing,
+    ...updates,
+  };
+
+  const rows = await sql`
+    UPDATE meetings
+    SET
+      date = ${meeting.date},
+      meeting_type = ${meeting.meetingType},
+      presiding = ${meeting.presiding},
+      conducting = ${meeting.conducting},
+      announcements = ${meeting.announcements},
+      opening_hymn = ${JSON.stringify(meeting.openingHymn)},
+      opening_prayer = ${meeting.openingPrayer},
+      ward_business = ${JSON.stringify(meeting.wardBusiness)},
+      stake_business = ${meeting.stakeBusiness},
+      sacrament_hymn = ${JSON.stringify(meeting.sacramentHymn)},
+      speakers = ${JSON.stringify(meeting.speakers)},
+      closing_hymn = ${JSON.stringify(meeting.closingHymn)},
+      closing_prayer = ${meeting.closingPrayer}
+    WHERE id = ${id}
+    RETURNING
+      id,
+      to_char(date, 'YYYY-MM-DD') AS "date",
+      meeting_type AS "meetingType",
+      presiding,
+      conducting,
+      announcements,
+      opening_hymn AS "openingHymn",
+      opening_prayer AS "openingPrayer",
+      ward_business AS "wardBusiness",
+      stake_business AS "stakeBusiness",
+      sacrament_hymn AS "sacramentHymn",
+      speakers,
+      closing_hymn AS "closingHymn",
+      closing_prayer AS "closingPrayer"
+  `;
+
+  return (rows[0] as unknown as SacramentMeeting) ?? null;
 }
 
-export async function deleteMeeting(
-  id: number
-): Promise<boolean> {
-  throw new Error(
-    "deleteMeeting: database implementation coming up soon!"
-  );
+export async function deleteMeeting(id: number): Promise<boolean> {
+  const result = await sql`
+    DELETE FROM meetings
+    WHERE id = ${id}
+    RETURNING id
+  `;
+
+  return result.length > 0;
 }
