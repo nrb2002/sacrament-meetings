@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { getMeetingById } from "@/lib/meetings-db";
+import EditMeetingForm from "@/components/EditMeetingForm";
 
 interface EditMeetingPageProps {
   params: Promise<{
@@ -26,10 +27,12 @@ export default async function EditMeetingPage({
   }
 
   return (
-    <div>
-      <h1 className="mb-8 text-3xl font-bold">Edit Meeting</h1>
+    <main className="mx-auto max-w-4xl px-6 py-8">
+      <h1 className="mb-8 text-3xl font-bold">
+        Edit Meeting
+      </h1>
 
-      {/* Your edit form goes here */}
-    </div>
+      <EditMeetingForm meeting={meeting} />
+    </main>
   );
 }

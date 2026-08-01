@@ -2,10 +2,10 @@
 
 import { notFound } from "next/navigation";
 
-import MeetingDetail from "@/components/MeetingDetail";
+import MeetingDetail from "@/components/meeting/MeetingDetail";
 import { getMeetingById } from "@/lib/meetings-db";
 
-import MeetingActions from "@/components/MeetingActions";
+import MeetingActions from "@/components/meeting/MeetingActions";
 
 interface PageProps {
   params: Promise<{

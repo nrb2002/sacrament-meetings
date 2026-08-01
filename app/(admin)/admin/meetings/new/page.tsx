@@ -1,4 +1,4 @@
-import MeetingForm from "@/components/MeetingForm";
+import MeetingForm from "@/components/meeting/MeetingForm";
 
 export default function NewMeetingPage() {
   return (
