@@ -52,7 +52,7 @@ export default function AdminSidebar() {
       {/* Logo / Brand */}
       <div className="flex h-16 items-center border-b px-6">
         <Link href="/admin" className="text-lg font-bold text-gray-900">
-          Sacrament Planner
+          Sacrament Meeting Planner
         </Link>
       </div>
 
