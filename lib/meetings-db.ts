@@ -226,7 +226,8 @@ export async function getMeetings(
       sacrament_hymn AS "sacramentHymn",
       speakers AS "speakers",
       closing_hymn AS "closingHymn",
-      closing_prayer AS "closingPrayer"
+      closing_prayer AS "closingPrayer",
+      attendance AS "attendance"
     FROM meetings
     WHERE
       presiding ILIKE ${searchTerm}
@@ -287,7 +288,8 @@ export async function getMeetingById(
       sacrament_hymn AS "sacramentHymn",
       speakers AS "speakers",
       closing_hymn AS "closingHymn",
-      closing_prayer AS "closingPrayer"
+      closing_prayer AS "closingPrayer",
+      attendance AS "attendance"
     FROM meetings
     WHERE id = ${id}
   `;
@@ -316,7 +318,8 @@ export async function getCurrentMeeting(): Promise<SacramentMeeting | null> {
       sacrament_hymn AS "sacramentHymn",
       speakers AS "speakers",
       closing_hymn AS "closingHymn",
-      closing_prayer AS "closingPrayer"
+      closing_prayer AS "closingPrayer",
+      attendance AS "attendance"
     FROM meetings
     WHERE date = CURRENT_DATE
   `;
@@ -343,7 +346,8 @@ export async function getPastMeetings(): Promise<SacramentMeeting[]> {
       sacrament_hymn AS "sacramentHymn",
       speakers AS "speakers",
       closing_hymn AS "closingHymn",
-      closing_prayer AS "closingPrayer"
+      closing_prayer AS "closingPrayer",
+      attendance AS "attendance"
     FROM meetings
     WHERE date < CURRENT_DATE
     ORDER BY date DESC
@@ -472,7 +476,7 @@ export async function updateMeeting(
       speakers = ${JSON.stringify(meeting.speakers)},
       closing_hymn = ${JSON.stringify(meeting.closingHymn)},
       closing_prayer = ${meeting.closingPrayer},
-      attendance = ${meeting.attendance}
+      attendance = ${meeting.attendance ?? null}
     WHERE id = ${id}
     RETURNING
       id,
