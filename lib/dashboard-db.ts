@@ -4,6 +4,14 @@ import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.DATABASE_URL!);
 
+
+export interface DashboardStats {
+  total: number;
+  upcoming: number;
+  past: number;
+  averageAttendance: number;
+}
+
 /* --------------------------------
    Dashboard Statistics
 -------------------------------- */
@@ -42,6 +50,7 @@ export async function getMeetingStats() {
   };
 }
 
+
 /* --------------------------------
    Recent Meetings
 -------------------------------- */
@@ -57,6 +66,7 @@ export async function getRecentMeetings(
       presiding AS "presiding",
       conducting AS "conducting"
     FROM meetings
+    WHERE date < CURRENT_DATE
     ORDER BY date DESC
     LIMIT ${limit}
   `;

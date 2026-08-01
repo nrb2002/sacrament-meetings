@@ -1,5 +1,3 @@
-// components/admin/AdminSidebar.
-
 "use client";
 
 import Link from "next/link";
@@ -7,134 +5,136 @@ import { usePathname } from "next/navigation";
 
 const navigation = [
   {
-    title: "Dashboard",
+    name: "Dashboard",
     href: "/admin",
-    icon: "▦",
+    icon: "⌂",
   },
-];
-
-const meetingNavigation = [
   {
-    title: "All Meetings",
+    name: "All Meetings",
     href: "/admin/meetings",
-    icon: "▤",
+    icon: "▣",
   },
   {
-    title: "Current Meeting",
-    href: "/admin/meetings/current",
-    icon: "●",
-  },
-  {
-    title: "Upcoming Meetings",
+    name: "Upcoming Meetings",
     href: "/admin/meetings/upcoming",
-    icon: "→",
-  },
-  {
-    title: "Past Meetings",
-    href: "/admin/meetings/past",
     icon: "◷",
   },
+  {
+    name: "Past Meetings",
+    href: "/admin/meetings/past",
+    icon: "✓",
+  },
+  {
+    name: "Attendance",
+    href: "/admin/attendance",
+    icon: "♙",
+  },
+  {
+    name: "Reports",
+    href: "/admin/reports",
+    icon: "▥",
+  },
 ];
 
-export default function AdminSidebar() {
+interface AdminSidebarProps {
+  mobileOpen: boolean;
+  onClose: () => void;
+}
+
+export default function AdminSidebar({
+  mobileOpen,
+  onClose,
+}: AdminSidebarProps) {
   const pathname = usePathname();
 
-  const isActive = (href: string) => {
-    if (href === "/admin") {
-      return pathname === "/admin";
-    }
-
-    return pathname === href || pathname.startsWith(`${href}/`);
-  };
-
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r bg-white lg:block">
-      {/* Logo / Brand */}
-      <div className="flex h-16 items-center border-b px-6">
-        <Link href="/admin" className="text-lg font-bold text-gray-900">
-          Sacrament Meeting Planner
-        </Link>
-      </div>
+    <>
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation menu"
+          onClick={onClose}
+          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+        />
+      )}
 
-      {/* Navigation */}
-      <nav className="flex h-[calc(100vh-4rem)] flex-col px-4 py-6">
-        <div className="space-y-1">
+      <aside
+        className={`
+          fixed inset-y-0 left-0 z-50 flex w-64
+          flex-col border-r border-gray-200 bg-white
+          transition-transform duration-300
+          lg:static lg:translate-x-0
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
+        `}
+      >
+        {/* Logo */}
+        <div className="flex h-20 items-center border-b border-gray-200 px-6">
+          <Link
+            href="/admin"
+            onClick={onClose}
+            className="flex flex-col"
+          >
+            <span className="text-lg font-bold text-sky-800">
+              Sacrament Meeting
+            </span>
+
+            <span className="text-sm text-gray-500">
+              Planner
+            </span>
+          </Link>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 space-y-1 overflow-y-auto p-4">
+          <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            Management
+          </p>
+
           {navigation.map((item) => {
-            const active = isActive(item.href);
+            const isActive =
+              item.href === "/admin"
+                ? pathname === "/admin"
+                : pathname.startsWith(item.href);
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
-                  active
-                    ? "bg-sky-100 text-sky-800"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
+                onClick={onClose}
+                className={`
+                  flex items-center gap-3 rounded-lg px-3 py-3
+                  text-sm font-medium transition
+                  ${
+                    isActive
+                      ? "bg-sky-50 text-sky-800"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  }
+                `}
               >
-                <span className="w-5 text-center">{item.icon}</span>
+                <span className="flex h-7 w-7 items-center justify-center rounded-md text-lg">
+                  {item.icon}
+                </span>
 
-                {item.title}
+                {item.name}
               </Link>
             );
           })}
-        </div>
-
-        {/* Meetings */}
-        <div className="mt-8">
-          <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
-            Meetings
-          </p>
-
-          <div className="space-y-1">
-            {meetingNavigation.map((item) => {
-              const active = isActive(item.href);
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
-                    active
-                      ? "bg-sky-100 text-sky-800"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }`}
-                >
-                  <span className="w-5 text-center">{item.icon}</span>
-
-                  {item.title}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className="mt-8">
-          <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
-            Actions
-          </p>
-
-          <Link
-            href="/admin/meetings/new"
-            className="flex items-center gap-3 rounded-lg bg-sky-700 px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-800"
-          >
-            <span className="w-5 text-center text-lg">+</span>
-            Create Meeting
-          </Link>
-        </div>
+        </nav>
 
         {/* Bottom Navigation */}
-        <div className="mt-auto border-t pt-4">
+        <div className="border-t border-gray-200 p-4">
           <Link
             href="/meetings"
-            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+            onClick={onClose}
+            className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-gray-600 transition hover:bg-gray-50 hover:text-gray-900"
           >
-            <span className="w-5 text-center">↗</span>
-            View Public Site
+            <span className="text-lg">←</span>
+
+            Back to Website
           </Link>
         </div>
-      </nav>
-    </aside>
+      </aside>
+    </>
   );
 }
