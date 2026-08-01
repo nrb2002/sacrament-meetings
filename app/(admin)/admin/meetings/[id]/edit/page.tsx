@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { getMeetingById } from "@/lib/meetings-db";
-import EditMeetingForm from "@/components/EditMeetingForm";
+import EditMeetingForm from "@/components/meeting/EditMeetingForm";
 
 interface EditMeetingPageProps {
   params: Promise<{
