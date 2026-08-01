@@ -7,9 +7,7 @@ interface RecentMeetingsProps {
   meetings: SacramentMeeting[];
 }
 
-export default function RecentMeetings({
-  meetings,
-}: RecentMeetingsProps) {
+export default function RecentMeetings({ meetings }: RecentMeetingsProps) {
   return (
     <section className="rounded-xl border border-gray-200 bg-white shadow-sm">
       {/* Header */}
@@ -60,10 +58,7 @@ export default function RecentMeetings({
                 </div>
 
                 {/* Arrow */}
-                <span
-                  aria-hidden="true"
-                  className="text-lg text-gray-400"
-                >
+                <span aria-hidden="true" className="text-lg text-gray-400">
                   →
                 </span>
               </div>
@@ -71,9 +66,7 @@ export default function RecentMeetings({
           ))
         ) : (
           <div className="px-6 py-12 text-center">
-            <p className="font-medium text-gray-700">
-              No meetings found
-            </p>
+            <p className="font-medium text-gray-700">No meetings found</p>
 
             <p className="mt-1 text-sm text-gray-500">
               Create your first meeting to get started.

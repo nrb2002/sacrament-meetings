@@ -16,12 +16,11 @@ export default function MeetingDetailActions({
   meetingId,
   isPastMeeting,
 }: MeetingDetailActionsProps) {
-  const [isDeleting, setIsDeleting] =
-    useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   async function handleDelete() {
     const confirmed = window.confirm(
-      "Are you sure you want to delete this meeting? This action cannot be undone."
+      "Are you sure you want to delete this meeting? This action cannot be undone.",
     );
 
     if (!confirmed) {
@@ -33,10 +32,7 @@ export default function MeetingDetailActions({
     try {
       await deleteMeeting(meetingId);
     } catch (error) {
-      console.error(
-        "Failed to delete meeting:",
-        error
-      );
+      console.error("Failed to delete meeting:", error);
 
       setIsDeleting(false);
     }
@@ -69,9 +65,7 @@ export default function MeetingDetailActions({
         disabled={isDeleting}
         className="rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {isDeleting
-          ? "Deleting..."
-          : "Delete Meeting"}
+        {isDeleting ? "Deleting..." : "Delete Meeting"}
       </button>
     </div>
   );

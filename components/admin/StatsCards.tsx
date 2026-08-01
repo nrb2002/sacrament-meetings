@@ -52,17 +52,13 @@ export default function StatsCards({
         >
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-500">
-                {stat.label}
-              </p>
+              <p className="text-sm font-medium text-gray-500">{stat.label}</p>
 
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
                 {stat.value}
               </p>
 
-              <p className="mt-1 text-xs text-gray-500">
-                {stat.description}
-              </p>
+              <p className="mt-1 text-xs text-gray-500">{stat.description}</p>
             </div>
 
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-100 text-lg font-semibold text-sky-700">

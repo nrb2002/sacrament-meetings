@@ -39,10 +39,7 @@ export default function AdminMobileSidebar({
       return pathname === "/admin";
     }
 
-    return (
-      pathname === href ||
-      pathname.startsWith(`${href}/`)
-    );
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
@@ -60,9 +57,7 @@ export default function AdminMobileSidebar({
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-72 transform bg-white shadow-xl transition-transform duration-300 ease-in-out lg:hidden ${
-          isOpen
-            ? "translate-x-0"
-            : "-translate-x-full"
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         aria-hidden={!isOpen}
       >
@@ -138,7 +133,6 @@ export default function AdminMobileSidebar({
               <span className="flex h-6 w-6 items-center justify-center">
                 ↗
               </span>
-
               View Public Site
             </Link>
           </div>

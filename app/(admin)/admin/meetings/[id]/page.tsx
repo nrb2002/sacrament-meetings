@@ -21,19 +21,15 @@ export default async function AdminMeetingDetailPage({
     notFound();
   }
 
-  const meeting =
-    await getMeetingById(meetingId);
+  const meeting = await getMeetingById(meetingId);
 
   if (!meeting) {
     notFound();
   }
 
-  const today = new Date()
-    .toISOString()
-    .split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
 
-  const isPastMeeting =
-    meeting.date < today;
+  const isPastMeeting = meeting.date < today;
 
   return (
     <div className="mx-auto max-w-5xl">

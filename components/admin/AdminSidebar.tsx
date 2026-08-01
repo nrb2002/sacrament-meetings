@@ -1,4 +1,3 @@
-
 // components/admin/AdminSidebar.
 
 "use client";
@@ -52,10 +51,7 @@ export default function AdminSidebar() {
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r bg-white lg:block">
       {/* Logo / Brand */}
       <div className="flex h-16 items-center border-b px-6">
-        <Link
-          href="/admin"
-          className="text-lg font-bold text-gray-900"
-        >
+        <Link href="/admin" className="text-lg font-bold text-gray-900">
           Sacrament Planner
         </Link>
       </div>
@@ -76,9 +72,7 @@ export default function AdminSidebar() {
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
-                <span className="w-5 text-center">
-                  {item.icon}
-                </span>
+                <span className="w-5 text-center">{item.icon}</span>
 
                 {item.title}
               </Link>
@@ -106,9 +100,7 @@ export default function AdminSidebar() {
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
                 >
-                  <span className="w-5 text-center">
-                    {item.icon}
-                  </span>
+                  <span className="w-5 text-center">{item.icon}</span>
 
                   {item.title}
                 </Link>
@@ -127,10 +119,7 @@ export default function AdminSidebar() {
             href="/admin/meetings/new"
             className="flex items-center gap-3 rounded-lg bg-sky-700 px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-800"
           >
-            <span className="w-5 text-center text-lg">
-              +
-            </span>
-
+            <span className="w-5 text-center text-lg">+</span>
             Create Meeting
           </Link>
         </div>
@@ -141,10 +130,7 @@ export default function AdminSidebar() {
             href="/meetings"
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
           >
-            <span className="w-5 text-center">
-              ↗
-            </span>
-
+            <span className="w-5 text-center">↗</span>
             View Public Site
           </Link>
         </div>
@@ -152,4 +138,3 @@ export default function AdminSidebar() {
     </aside>
   );
 }
-

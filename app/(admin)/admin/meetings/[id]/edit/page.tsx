@@ -28,9 +28,7 @@ export default async function EditMeetingPage({
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-8">
-      <h1 className="mb-8 text-3xl font-bold">
-        Edit Meeting
-      </h1>
+      <h1 className="mb-8 text-3xl font-bold">Edit Meeting</h1>
 
       <EditMeetingForm meeting={meeting} />
     </main>

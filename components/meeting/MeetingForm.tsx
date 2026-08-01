@@ -3,29 +3,19 @@
 "use client";
 
 import { useActionState } from "react";
-import {
-  createMeeting,
-  initialState,
-} from "@/lib/actions";
+import { createMeeting, initialState } from "@/lib/actions";
 
 export default function MeetingForm() {
-  const [state, formAction, isPending] =
-    useActionState(
-      createMeeting,
-      initialState
-    );
+  const [state, formAction, isPending] = useActionState(
+    createMeeting,
+    initialState,
+  );
 
   return (
-    <form
-      action={formAction}
-      className="space-y-8"
-    >
+    <form action={formAction} className="space-y-8">
       {/* General form error */}
       {state.message && (
-        <div
-          className="rounded-md bg-red-50 p-4 text-red-700"
-          role="alert"
-        >
+        <div className="rounded-md bg-red-50 p-4 text-red-700" role="alert">
           {state.message}
         </div>
       )}
@@ -35,16 +25,11 @@ export default function MeetingForm() {
       ========================== */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Meeting Information
-        </h2>
+        <h2 className="text-xl font-semibold">Meeting Information</h2>
 
         {/* Date */}
         <div>
-          <label
-            htmlFor="date"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="date" className="mb-1 block font-medium">
             Date
           </label>
 
@@ -68,10 +53,7 @@ export default function MeetingForm() {
 
         {/* Meeting Type */}
         <div>
-          <label
-            htmlFor="meetingType"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="meetingType" className="mb-1 block font-medium">
             Meeting Type
           </label>
 
@@ -87,25 +69,15 @@ export default function MeetingForm() {
               Select meeting type
             </option>
 
-            <option value="testimony">
-              Testimony
-            </option>
+            <option value="testimony">Testimony</option>
 
-            <option value="regular">
-              Regular
-            </option>
+            <option value="regular">Regular</option>
 
-            <option value="stake">
-              Stake
-            </option>
+            <option value="stake">Stake</option>
 
-            <option value="general">
-              General
-            </option>
+            <option value="general">General</option>
 
-            <option value="special">
-              Special
-            </option>
+            <option value="special">Special</option>
           </select>
 
           <p
@@ -119,10 +91,7 @@ export default function MeetingForm() {
 
         {/* Presiding */}
         <div>
-          <label
-            htmlFor="presiding"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="presiding" className="mb-1 block font-medium">
             Presiding
           </label>
 
@@ -147,10 +116,7 @@ export default function MeetingForm() {
 
         {/* Conducting */}
         <div>
-          <label
-            htmlFor="conducting"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="conducting" className="mb-1 block font-medium">
             Conducting
           </label>
 
@@ -179,16 +145,11 @@ export default function MeetingForm() {
       ========================== */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Opening
-        </h2>
+        <h2 className="text-xl font-semibold">Opening</h2>
 
         {/* Opening Hymn Number */}
         <div>
-          <label
-            htmlFor="openingHymnNumber"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="openingHymnNumber" className="mb-1 block font-medium">
             Opening Hymn Number
           </label>
 
@@ -205,10 +166,7 @@ export default function MeetingForm() {
 
         {/* Opening Hymn Title */}
         <div>
-          <label
-            htmlFor="openingHymnTitle"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="openingHymnTitle" className="mb-1 block font-medium">
             Opening Hymn Title
           </label>
 
@@ -232,10 +190,7 @@ export default function MeetingForm() {
 
         {/* Opening Prayer */}
         <div>
-          <label
-            htmlFor="openingPrayer"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="openingPrayer" className="mb-1 block font-medium">
             Opening Prayer
           </label>
 
@@ -263,9 +218,7 @@ export default function MeetingForm() {
       ========================== */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Sacrament
-        </h2>
+        <h2 className="text-xl font-semibold">Sacrament</h2>
 
         {/* Sacrament Hymn Number */}
         <div>
@@ -320,16 +273,11 @@ export default function MeetingForm() {
       ========================== */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Closing
-        </h2>
+        <h2 className="text-xl font-semibold">Closing</h2>
 
         {/* Closing Hymn Number */}
         <div>
-          <label
-            htmlFor="closingHymnNumber"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="closingHymnNumber" className="mb-1 block font-medium">
             Closing Hymn Number
           </label>
 
@@ -346,10 +294,7 @@ export default function MeetingForm() {
 
         {/* Closing Hymn Title */}
         <div>
-          <label
-            htmlFor="closingHymnTitle"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="closingHymnTitle" className="mb-1 block font-medium">
             Closing Hymn Title
           </label>
 
@@ -373,10 +318,7 @@ export default function MeetingForm() {
 
         {/* Closing Prayer */}
         <div>
-          <label
-            htmlFor="closingPrayer"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="closingPrayer" className="mb-1 block font-medium">
             Closing Prayer
           </label>
 
@@ -403,48 +345,20 @@ export default function MeetingForm() {
           HIDDEN DATA
       ========================== */}
 
-      <input
-        type="hidden"
-        name="announcements"
-        value="[]"
-      />
+      <input type="hidden" name="announcements" value="[]" />
 
-      <input
-        type="hidden"
-        name="wardBusiness"
-        value="[]"
-      />
+      <input type="hidden" name="wardBusiness" value="[]" />
 
-      <input
-        type="hidden"
-        name="stakeBusiness"
-        value="false"
-      />
+      <input type="hidden" name="stakeBusiness" value="false" />
 
-      <input
-        type="hidden"
-        name="speakers"
-        value="[]"
-      />
+      <input type="hidden" name="speakers" value="[]" />
 
       {/* Hidden JSON objects for hymns */}
-      <input
-        type="hidden"
-        name="openingHymn"
-        value="{}"
-      />
+      <input type="hidden" name="openingHymn" value="{}" />
 
-      <input
-        type="hidden"
-        name="sacramentHymn"
-        value="{}"
-      />
+      <input type="hidden" name="sacramentHymn" value="{}" />
 
-      <input
-        type="hidden"
-        name="closingHymn"
-        value="{}"
-      />
+      <input type="hidden" name="closingHymn" value="{}" />
 
       {/* =========================
           SUBMIT
@@ -455,11 +369,8 @@ export default function MeetingForm() {
         disabled={isPending}
         className="rounded bg-sky-700 px-6 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {isPending
-          ? "Creating Meeting..."
-          : "Create Meeting"}
+        {isPending ? "Creating Meeting..." : "Create Meeting"}
       </button>
     </form>
   );
 }
-

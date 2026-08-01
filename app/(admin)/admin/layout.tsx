@@ -9,9 +9,7 @@ interface AdminLayoutProps {
   children: ReactNode;
 }
 
-export default function AdminLayout({
-  children,
-}: AdminLayoutProps) {
+export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Desktop Sidebar */}
@@ -30,4 +28,3 @@ export default function AdminLayout({
     </div>
   );
 }
-

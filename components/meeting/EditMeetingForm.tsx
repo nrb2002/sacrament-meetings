@@ -4,10 +4,7 @@
 
 import { useActionState } from "react";
 
-import {
-  initialState,
-  updateMeeting,
-} from "@/lib/actions";
+import { initialState, updateMeeting } from "@/lib/actions";
 
 import type { SacramentMeeting } from "@/lib/types";
 
@@ -15,28 +12,18 @@ interface EditMeetingFormProps {
   meeting: SacramentMeeting;
 }
 
-export default function EditMeetingForm({
-  meeting,
-}: EditMeetingFormProps) {
-  const updateMeetingWithId =
-    updateMeeting.bind(null, meeting.id);
+export default function EditMeetingForm({ meeting }: EditMeetingFormProps) {
+  const updateMeetingWithId = updateMeeting.bind(null, meeting.id);
 
-  const [state, formAction, isPending] =
-    useActionState(
-      updateMeetingWithId,
-      initialState
-    );
+  const [state, formAction, isPending] = useActionState(
+    updateMeetingWithId,
+    initialState,
+  );
 
   return (
-    <form
-      action={formAction}
-      className="space-y-8"
-    >
+    <form action={formAction} className="space-y-8">
       {state.message && (
-        <div
-          role="alert"
-          className="rounded-md bg-red-50 p-4 text-red-700"
-        >
+        <div role="alert" className="rounded-md bg-red-50 p-4 text-red-700">
           {state.message}
         </div>
       )}
@@ -44,15 +31,10 @@ export default function EditMeetingForm({
       {/* Meeting Information */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Meeting Information
-        </h2>
+        <h2 className="text-xl font-semibold">Meeting Information</h2>
 
         <div>
-          <label
-            htmlFor="date"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="date" className="mb-1 block font-medium">
             Date
           </label>
 
@@ -76,10 +58,7 @@ export default function EditMeetingForm({
         </div>
 
         <div>
-          <label
-            htmlFor="meetingType"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="meetingType" className="mb-1 block font-medium">
             Meeting Type
           </label>
 
@@ -91,25 +70,15 @@ export default function EditMeetingForm({
             aria-describedby="meetingType-error"
             className="w-full rounded border p-2"
           >
-            <option value="testimony">
-              Testimony
-            </option>
+            <option value="testimony">Testimony</option>
 
-            <option value="regular">
-              Regular
-            </option>
+            <option value="regular">Regular</option>
 
-            <option value="stake">
-              Stake
-            </option>
+            <option value="stake">Stake</option>
 
-            <option value="general">
-              General
-            </option>
+            <option value="general">General</option>
 
-            <option value="special">
-              Special
-            </option>
+            <option value="special">Special</option>
           </select>
 
           <p
@@ -122,10 +91,7 @@ export default function EditMeetingForm({
         </div>
 
         <div>
-          <label
-            htmlFor="presiding"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="presiding" className="mb-1 block font-medium">
             Presiding
           </label>
 
@@ -149,10 +115,7 @@ export default function EditMeetingForm({
         </div>
 
         <div>
-          <label
-            htmlFor="conducting"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="conducting" className="mb-1 block font-medium">
             Conducting
           </label>
 
@@ -179,9 +142,7 @@ export default function EditMeetingForm({
       {/* Opening */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Opening
-        </h2>
+        <h2 className="text-xl font-semibold">Opening</h2>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
@@ -241,10 +202,7 @@ export default function EditMeetingForm({
         </div>
 
         <div>
-          <label
-            htmlFor="openingPrayer"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="openingPrayer" className="mb-1 block font-medium">
             Opening Prayer
           </label>
 
@@ -271,9 +229,7 @@ export default function EditMeetingForm({
       {/* Sacrament */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Sacrament
-        </h2>
+        <h2 className="text-xl font-semibold">Sacrament</h2>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
@@ -290,9 +246,7 @@ export default function EditMeetingForm({
               type="number"
               min="1"
               required
-              defaultValue={
-                meeting.sacramentHymn.number
-              }
+              defaultValue={meeting.sacramentHymn.number}
               aria-describedby="sacramentHymnNumber-error"
               className="w-full rounded border p-2"
             />
@@ -302,9 +256,7 @@ export default function EditMeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.sacramentHymn?.join(
-                ", "
-              )}
+              {state.errors?.sacramentHymn?.join(", ")}
             </p>
           </div>
 
@@ -321,9 +273,7 @@ export default function EditMeetingForm({
               name="sacramentHymnTitle"
               type="text"
               required
-              defaultValue={
-                meeting.sacramentHymn.title
-              }
+              defaultValue={meeting.sacramentHymn.title}
               aria-describedby="sacramentHymnTitle-error"
               className="w-full rounded border p-2"
             />
@@ -333,9 +283,7 @@ export default function EditMeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.sacramentHymn?.join(
-                ", "
-              )}
+              {state.errors?.sacramentHymn?.join(", ")}
             </p>
           </div>
         </div>
@@ -344,9 +292,7 @@ export default function EditMeetingForm({
       {/* Closing */}
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">
-          Closing
-        </h2>
+        <h2 className="text-xl font-semibold">Closing</h2>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
@@ -406,10 +352,7 @@ export default function EditMeetingForm({
         </div>
 
         <div>
-          <label
-            htmlFor="closingPrayer"
-            className="mb-1 block font-medium"
-          >
+          <label htmlFor="closingPrayer" className="mb-1 block font-medium">
             Closing Prayer
           </label>
 
@@ -438,33 +381,25 @@ export default function EditMeetingForm({
       <input
         type="hidden"
         name="announcements"
-        value={JSON.stringify(
-          meeting.announcements ?? []
-        )}
+        value={JSON.stringify(meeting.announcements ?? [])}
       />
 
       <input
         type="hidden"
         name="wardBusiness"
-        value={JSON.stringify(
-          meeting.wardBusiness ?? []
-        )}
+        value={JSON.stringify(meeting.wardBusiness ?? [])}
       />
 
       <input
         type="hidden"
         name="stakeBusiness"
-        value={String(
-          meeting.stakeBusiness ?? false
-        )}
+        value={String(meeting.stakeBusiness ?? false)}
       />
 
       <input
         type="hidden"
         name="speakers"
-        value={JSON.stringify(
-          meeting.speakers ?? []
-        )}
+        value={JSON.stringify(meeting.speakers ?? [])}
       />
 
       <div className="flex gap-4">
@@ -473,9 +408,7 @@ export default function EditMeetingForm({
           disabled={isPending}
           className="rounded bg-sky-700 px-6 py-3 font-semibold text-white disabled:opacity-50"
         >
-          {isPending
-            ? "Saving Changes..."
-            : "Save Changes"}
+          {isPending ? "Saving Changes..." : "Save Changes"}
         </button>
 
         <a
@@ -488,4 +421,3 @@ export default function EditMeetingForm({
     </form>
   );
 }
-
