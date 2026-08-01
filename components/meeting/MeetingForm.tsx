@@ -4,11 +4,12 @@
 
 import { useActionState } from "react";
 
-import {
-  createMeeting,
-  initialState,
+import { 
+  createMeeting, 
   updateMeeting,
 } from "@/lib/actions";
+
+import { initialState } from "@/lib/action-types";
 
 import type { SacramentMeeting } from "@/lib/types";
 
