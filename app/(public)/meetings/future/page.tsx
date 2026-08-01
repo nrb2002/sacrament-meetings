@@ -1,7 +1,7 @@
 // app/(public)/meetings/future/page.tsx
 
 import EmptyState from "@/components/EmptyState";
-import MeetingCard from "@/components/MeetingCard";
+import MeetingCard from "@/components/meeting/MeetingCard";
 
 import { getFutureMeetings } from "@/lib/meetings-db";
 

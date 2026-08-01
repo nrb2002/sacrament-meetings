@@ -1,41 +1,46 @@
-// app/(admin)/admin/meetings/[id]/page.tsx
-
 import { notFound } from "next/navigation";
 
-import MeetingDetail from "@/components/MeetingDetail";
 import { getMeetingById } from "@/lib/meetings-db";
+import MeetingDetail from "@/components/meeting/MeetingDetail";
+import MeetingDetailActions from "@/components/admin/MeetingDetailActions";
 
-interface AdminMeetingPageProps {
+interface AdminMeetingDetailPageProps {
   params: Promise<{
     id: string;
   }>;
 }
 
-export default async function AdminMeetingPage({
+export default async function AdminMeetingDetailPage({
   params,
-}: AdminMeetingPageProps) {
+}: AdminMeetingDetailPageProps) {
   const { id } = await params;
+
   const meetingId = Number(id);
 
   if (Number.isNaN(meetingId)) {
     notFound();
   }
 
-  const meeting = await getMeetingById(meetingId);
+  const meeting =
+    await getMeetingById(meetingId);
 
   if (!meeting) {
     notFound();
   }
 
-  return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Manage Meeting</h1>
+  const today = new Date()
+    .toISOString()
+    .split("T")[0];
 
-        <p className="mt-2 text-gray-600">
-          View and manage this sacrament meeting.
-        </p>
-      </div>
+  const isPastMeeting =
+    meeting.date < today;
+
+  return (
+    <div className="mx-auto max-w-5xl">
+      <MeetingDetailActions
+        meetingId={meeting.id}
+        isPastMeeting={isPastMeeting}
+      />
 
       <MeetingDetail meeting={meeting} />
     </div>
