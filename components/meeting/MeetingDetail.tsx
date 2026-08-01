@@ -33,22 +33,7 @@ export default function MeetingDetail({
           Sacrament Meeting Plan
         </h1>
 
-        {isPastMeeting ? (
-          <span
-            className="cursor-not-allowed rounded-md bg-gray-300 px-5 py-2.5 font-semibold text-gray-600"
-            aria-disabled="true"
-            title="Past meetings cannot be edited"
-          >
-            Edit Meeting
-          </span>
-        ) : (
-          <Link
-            href={`/admin/meetings/${meeting.id}/edit`}
-            className="rounded-md bg-sky-700 px-5 py-2.5 font-semibold text-white transition hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
-          >
-            Edit Meeting
-          </Link>
-        )}
+        
       </div>
 
       <p>
