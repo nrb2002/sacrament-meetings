@@ -471,7 +471,8 @@ export async function updateMeeting(
       sacrament_hymn = ${JSON.stringify(meeting.sacramentHymn)},
       speakers = ${JSON.stringify(meeting.speakers)},
       closing_hymn = ${JSON.stringify(meeting.closingHymn)},
-      closing_prayer = ${meeting.closingPrayer}
+      closing_prayer = ${meeting.closingPrayer},
+      attendance = ${meeting.attendance}
     WHERE id = ${id}
     RETURNING
       id,
@@ -487,7 +488,8 @@ export async function updateMeeting(
       sacrament_hymn AS "sacramentHymn",
       speakers,
       closing_hymn AS "closingHymn",
-      closing_prayer AS "closingPrayer"
+      closing_prayer AS "closingPrayer",
+      attendance AS "attendance"
   `;
 
   return (rows[0] as unknown as SacramentMeeting) ?? null;

@@ -1,7 +1,7 @@
 // app/(public)/meetings/page.tsx
 
-import MeetingCard from "@/components/MeetingCard";
-import { MeetingSearch } from "@/components/MeetingSearch";
+import MeetingCard from "@/components/meeting/MeetingCard";
+import { MeetingSearch } from "@/components/meeting/MeetingSearch";
 import Pagination from "@/components/Pagination";
 
 import { getMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
