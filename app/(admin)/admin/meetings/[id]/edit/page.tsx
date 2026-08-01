@@ -1,5 +1,8 @@
+// app/(admin)/admin/meetings/[id]/edit/page.tsx
+
 import { notFound } from "next/navigation";
 
+import MeetingForm from "@/components/meeting/MeetingForm";
 import { getMeetingById } from "@/lib/meetings-db";
 
 interface EditMeetingPageProps {
@@ -19,17 +22,27 @@ export default async function EditMeetingPage({
     notFound();
   }
 
-  const meeting = await getMeetingById(meetingId);
+  const meeting =
+    await getMeetingById(meetingId);
 
   if (!meeting) {
     notFound();
   }
 
   return (
-    <div>
-      <h1 className="mb-8 text-3xl font-bold">Edit Meeting</h1>
+    <div className="mx-auto max-w-5xl">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold">
+          Edit Meeting
+        </h1>
 
-      {/* Your edit form goes here */}
+        <p className="mt-2 text-sm text-gray-500">
+          Update the details for the{" "}
+          {meeting.date} sacrament meeting.
+        </p>
+      </div>
+
+      <MeetingForm meeting={meeting} />
     </div>
   );
 }

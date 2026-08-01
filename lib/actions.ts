@@ -1,3 +1,5 @@
+// lib/actions.ts
+
 "use server";
 
 import { redirect } from "next/navigation";
@@ -61,6 +63,12 @@ export const MeetingFormSchema = z.object({
   closingHymn: HymnSchema,
 
   closingPrayer: z.string().min(1, "Closing prayer is required"),
+
+  attendance: z.coerce
+    .number()
+    .int()
+    .min(0, "Attendance must be 0 or greater")
+    .optional(),
 });
 
 /* --------------------------------
@@ -84,6 +92,7 @@ export type State = {
     speakers?: string[];
     closingHymn?: string[];
     closingPrayer?: string[];
+    attendance?: string[];
   };
 };
 
@@ -97,19 +106,33 @@ Get Form Data
 -------------------------------- */
 
 function getMeetingFormData(formData: FormData) {
+  // Convert each line of the Ward Business textarea
+  // into a separate WardBusinessItem.
+  const wardBusiness = String(
+    formData.get("wardBusiness") ?? "",
+  )
+    .split("\n")
+    .map((description) => description.trim())
+    .filter(Boolean)
+    .map((description) => ({
+      description,
+    }));
+
   return {
-    date: String(formData.get("date") ?? ""),
+    date: String(
+      formData.get("date") ?? "",
+    ),
 
     meetingType: String(
-      formData.get("meetingType") ?? ""
+      formData.get("meetingType") ?? "",
     ),
 
     presiding: String(
-      formData.get("presiding") ?? ""
+      formData.get("presiding") ?? "",
     ),
 
     conducting: String(
-      formData.get("conducting") ?? ""
+      formData.get("conducting") ?? "",
     ),
 
     announcements: formData
@@ -119,49 +142,87 @@ function getMeetingFormData(formData: FormData) {
 
     openingHymn: {
       number: Number(
-        formData.get("openingHymnNumber")
+        formData.get(
+          "openingHymnNumber",
+        ),
       ),
+
       title: String(
-        formData.get("openingHymnTitle") ?? ""
+        formData.get(
+          "openingHymnTitle",
+        ) ?? "",
       ),
     },
 
     openingPrayer: String(
-      formData.get("openingPrayer") ?? ""
+      formData.get(
+        "openingPrayer",
+      ) ?? "",
     ),
 
-    wardBusiness: formData
-      .getAll("wardBusiness")
-      .map((description) => ({
-        description: String(description),
-      })),
+    wardBusiness,
 
     stakeBusiness:
-      formData.get("stakeBusiness") === "true",
+      formData.get(
+        "stakeBusiness",
+      ) === "true",
 
     sacramentHymn: {
       number: Number(
-        formData.get("sacramentHymnNumber")
+        formData.get(
+          "sacramentHymnNumber",
+        ),
       ),
+
       title: String(
-        formData.get("sacramentHymnTitle") ?? ""
+        formData.get(
+          "sacramentHymnTitle",
+        ) ?? "",
       ),
     },
 
-    speakers: [],
+    // Speakers are currently managed as a
+    // hidden JSON field by the reusable form.
+    speakers: (() => {
+      try {
+        return JSON.parse(
+          String(
+            formData.get(
+              "speakers",
+            ) ?? "[]",
+          ),
+        );
+      } catch {
+        return [];
+      }
+    })(),
 
     closingHymn: {
       number: Number(
-        formData.get("closingHymnNumber")
+        formData.get(
+          "closingHymnNumber",
+        ),
       ),
+
       title: String(
-        formData.get("closingHymnTitle") ?? ""
+        formData.get(
+          "closingHymnTitle",
+        ) ?? "",
       ),
     },
 
     closingPrayer: String(
-      formData.get("closingPrayer") ?? ""
+      formData.get(
+        "closingPrayer",
+      ) ?? "",
     ),
+
+    attendance:
+    formData.get("attendance") === ""
+      ? undefined
+      : Number(
+          formData.get("attendance"),
+        ),
   };
 }
 

@@ -2,7 +2,7 @@
 
 import { notFound } from "next/navigation";
 
-import MeetingDetail from "@/components/MeetingDetail";
+import MeetingDetail from "@/components/meeting/MeetingDetail";
 import { getMeetingById } from "@/lib/meetings-db";
 
 interface AdminMeetingPageProps {

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import MeetingCard from "@/components/MeetingCard";
+import MeetingCard from "@/components/meeting/MeetingCard";
 import { getMeetings } from "@/lib/meetings-db";
 
 export const dynamic = "force-dynamic";

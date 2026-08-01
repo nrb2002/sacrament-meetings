@@ -1,6 +1,4 @@
-// components/MeetingDetail.
-
-import Link from "next/link";
+// components/MeetingDetail.tsx
 
 import type { SacramentMeeting } from "@/lib/types";
 import MeetingHeader from "./MeetingHeader";
@@ -10,19 +8,11 @@ interface MeetingDetailProps {
 }
 
 export default function MeetingDetail({ meeting }: MeetingDetailProps) {
-  // Compare dates without time-zone issues.
-  const today = new Date().toISOString().split("T")[0];
-
-  const isPastMeeting = meeting.date < today;
-
   return (
     <article className="mx-auto max-w-4xl rounded-xl bg-white p-6 shadow">
       <MeetingHeader stake="Kinshasa Stake" ward="Kasa-Vubu Ward" />
 
-      {/* Page Actions */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl font-bold">Sacrament Meeting Plan</h1>
-      </div>
+      <h1 className="mb-6 text-3xl font-bold">Sacrament Meeting Plan</h1>
 
       <p>
         <strong>Date:</strong> {meeting.date}
