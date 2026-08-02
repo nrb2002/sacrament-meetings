@@ -2,14 +2,11 @@
 
 import Link from "next/link";
 
-
 interface AdminHeaderProps {
   onMenuClick: () => void;
 }
 
-export default function AdminHeader({
-  onMenuClick,
-}: AdminHeaderProps) {
+export default function AdminHeader({ onMenuClick }: AdminHeaderProps) {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-gray-200 bg-white px-4 sm:px-6">
       {/* Mobile menu button */}
@@ -39,9 +36,7 @@ export default function AdminHeader({
       {/* Page title area */}
 
       <div className="hidden lg:block">
-        <p className="text-sm text-gray-500">
-          Administration
-        </p>
+        <p className="text-sm text-gray-500">Administration</p>
       </div>
 
       {/* Right side */}

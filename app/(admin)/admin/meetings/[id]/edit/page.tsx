@@ -22,8 +22,7 @@ export default async function EditMeetingPage({
     notFound();
   }
 
-  const meeting =
-    await getMeetingById(meetingId);
+  const meeting = await getMeetingById(meetingId);
 
   if (!meeting) {
     notFound();
@@ -32,13 +31,10 @@ export default async function EditMeetingPage({
   return (
     <div className="mx-auto max-w-5xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">
-          Edit Meeting
-        </h1>
+        <h1 className="text-3xl font-bold">Edit Meeting</h1>
 
         <p className="mt-2 text-sm text-gray-500">
-          Update the details for the{" "}
-          {meeting.date} sacrament meeting.
+          Update the details for the {meeting.date} sacrament meeting.
         </p>
       </div>
 

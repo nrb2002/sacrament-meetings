@@ -1,16 +1,11 @@
-import type { AttendanceTrend } from "@/lib/dashboard-db";
+import type { getAttendanceTrend } from "@/lib/dashboard-db";
 
 interface AttendanceChartProps {
   data: AttendanceTrend[];
 }
 
-export default function AttendanceChart({
-  data,
-}: AttendanceChartProps) {
-  const maxAttendance = Math.max(
-    ...data.map((item) => item.attendance),
-    1,
-  );
+export default function AttendanceChart({ data }: AttendanceChartProps) {
+  const maxAttendance = Math.max(...data.map((item) => item.attendance), 1);
 
   return (
     <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
@@ -33,9 +28,7 @@ export default function AttendanceChart({
           <div className="flex min-w-[500px] items-end gap-4 border-b border-gray-200 px-4 pb-4">
             {data.map((item) => {
               const height = Math.max(
-                (item.attendance /
-                  maxAttendance) *
-                  100,
+                (item.attendance / maxAttendance) * 100,
                 5,
               );
 
@@ -59,9 +52,7 @@ export default function AttendanceChart({
                   </div>
 
                   <span className="text-xs text-gray-500">
-                    {new Date(
-                      `${item.date}T00:00:00`,
-                    ).toLocaleDateString(
+                    {new Date(`${item.date}T00:00:00`).toLocaleDateString(
                       "en-US",
                       {
                         month: "short",

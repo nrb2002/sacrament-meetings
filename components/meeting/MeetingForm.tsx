@@ -4,10 +4,7 @@
 
 import { useActionState } from "react";
 
-import { 
-  createMeeting, 
-  updateMeeting,
-} from "@/lib/actions";
+import { createMeeting, updateMeeting } from "@/lib/actions";
 
 import { initialState } from "@/lib/action-types";
 
@@ -17,23 +14,15 @@ interface MeetingFormProps {
   meeting?: SacramentMeeting;
 }
 
-export default function MeetingForm({
-  meeting,
-}: MeetingFormProps) {
+export default function MeetingForm({ meeting }: MeetingFormProps) {
   const isEditMode = Boolean(meeting);
 
-  const action = meeting
-    ? updateMeeting.bind(null, meeting.id)
-    : createMeeting;
+  const action = meeting ? updateMeeting.bind(null, meeting.id) : createMeeting;
 
-  const [state, formAction, isPending] =
-    useActionState(action, initialState);
+  const [state, formAction, isPending] = useActionState(action, initialState);
 
   return (
-    <form
-      action={formAction}
-      className="space-y-10"
-    >
+    <form action={formAction} className="space-y-10">
       {/* General Form Error */}
       {state.message && (
         <div
@@ -55,8 +44,7 @@ export default function MeetingForm({
           </h2>
 
           <p className="mt-1 text-sm text-gray-500">
-            Enter the basic information for this
-            sacrament meeting.
+            Enter the basic information for this sacrament meeting.
           </p>
         </div>
 
@@ -102,9 +90,7 @@ export default function MeetingForm({
               id="meetingType"
               name="meetingType"
               required
-              defaultValue={
-                meeting?.meetingType ?? ""
-              }
+              defaultValue={meeting?.meetingType ?? ""}
               aria-describedby="meetingType-error"
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 focus:outline-none"
             >
@@ -112,25 +98,15 @@ export default function MeetingForm({
                 Select meeting type
               </option>
 
-              <option value="regular">
-                Regular
-              </option>
+              <option value="regular">Regular</option>
 
-              <option value="testimony">
-                Testimony
-              </option>
+              <option value="testimony">Testimony</option>
 
-              <option value="stake">
-                Stake
-              </option>
+              <option value="stake">Stake</option>
 
-              <option value="general">
-                General
-              </option>
+              <option value="general">General</option>
 
-              <option value="special">
-                Special
-              </option>
+              <option value="special">Special</option>
             </select>
 
             <p
@@ -138,9 +114,7 @@ export default function MeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.meetingType?.join(
-                ", ",
-              )}
+              {state.errors?.meetingType?.join(", ")}
             </p>
           </div>
 
@@ -158,9 +132,7 @@ export default function MeetingForm({
               name="presiding"
               type="text"
               required
-              defaultValue={
-                meeting?.presiding ?? ""
-              }
+              defaultValue={meeting?.presiding ?? ""}
               aria-describedby="presiding-error"
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 focus:outline-none"
             />
@@ -170,9 +142,7 @@ export default function MeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.presiding?.join(
-                ", ",
-              )}
+              {state.errors?.presiding?.join(", ")}
             </p>
           </div>
 
@@ -190,9 +160,7 @@ export default function MeetingForm({
               name="conducting"
               type="text"
               required
-              defaultValue={
-                meeting?.conducting ?? ""
-              }
+              defaultValue={meeting?.conducting ?? ""}
               aria-describedby="conducting-error"
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 focus:outline-none"
             />
@@ -202,9 +170,7 @@ export default function MeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.conducting?.join(
-                ", ",
-              )}
+              {state.errors?.conducting?.join(", ")}
             </p>
           </div>
 
@@ -223,9 +189,7 @@ export default function MeetingForm({
               type="number"
               min="0"
               step="1"
-              defaultValue={
-                meeting?.attendance ?? ""
-              }
+              defaultValue={meeting?.attendance ?? ""}
               aria-describedby="attendance-error"
               placeholder="e.g. 250"
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 focus:outline-none"
@@ -236,9 +200,7 @@ export default function MeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.attendance?.join(
-                ", ",
-              )}
+              {state.errors?.attendance?.join(", ")}
             </p>
           </div>
         </div>
@@ -249,9 +211,7 @@ export default function MeetingForm({
       ========================================= */}
 
       <section className="space-y-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">
-          Opening
-        </h2>
+        <h2 className="text-xl font-semibold text-gray-900">Opening</h2>
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Opening Hymn Number */}
@@ -269,9 +229,7 @@ export default function MeetingForm({
               type="number"
               min="1"
               required
-              defaultValue={
-                meeting?.openingHymn.number ?? ""
-              }
+              defaultValue={meeting?.openingHymn.number ?? ""}
               aria-describedby="openingHymnNumber-error"
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
@@ -281,9 +239,7 @@ export default function MeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.openingHymn?.join(
-                ", ",
-              )}
+              {state.errors?.openingHymn?.join(", ")}
             </p>
           </div>
 
@@ -301,9 +257,7 @@ export default function MeetingForm({
               name="openingHymnTitle"
               type="text"
               required
-              defaultValue={
-                meeting?.openingHymn.title ?? ""
-              }
+              defaultValue={meeting?.openingHymn.title ?? ""}
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
           </div>
@@ -322,9 +276,7 @@ export default function MeetingForm({
               name="openingPrayer"
               type="text"
               required
-              defaultValue={
-                meeting?.openingPrayer ?? ""
-              }
+              defaultValue={meeting?.openingPrayer ?? ""}
               aria-describedby="openingPrayer-error"
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
@@ -334,9 +286,7 @@ export default function MeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.openingPrayer?.join(
-                ", ",
-              )}
+              {state.errors?.openingPrayer?.join(", ")}
             </p>
           </div>
         </div>
@@ -347,9 +297,7 @@ export default function MeetingForm({
       ========================================= */}
 
       <section className="space-y-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">
-          Ward Business
-        </h2>
+        <h2 className="text-xl font-semibold text-gray-900">Ward Business</h2>
 
         <div>
           <label
@@ -365,10 +313,7 @@ export default function MeetingForm({
             rows={4}
             defaultValue={
               meeting?.wardBusiness
-                ?.map(
-                  (item) =>
-                    item.description,
-                )
+                ?.map((item) => item.description)
                 .join("\n") ?? ""
             }
             aria-describedby="wardBusiness-error"
@@ -381,20 +326,14 @@ export default function MeetingForm({
             aria-live="polite"
             className="mt-1 text-sm text-red-600"
           >
-            {state.errors?.wardBusiness?.join(
-              ", ",
-            )}
+            {state.errors?.wardBusiness?.join(", ")}
           </p>
         </div>
 
         <input
           type="hidden"
           name="stakeBusiness"
-          value={
-            meeting?.stakeBusiness
-              ? "true"
-              : "false"
-          }
+          value={meeting?.stakeBusiness ? "true" : "false"}
         />
       </section>
 
@@ -403,9 +342,7 @@ export default function MeetingForm({
       ========================================= */}
 
       <section className="space-y-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">
-          Sacrament
-        </h2>
+        <h2 className="text-xl font-semibold text-gray-900">Sacrament</h2>
 
         <div className="grid gap-6 md:grid-cols-2">
           <div>
@@ -422,10 +359,7 @@ export default function MeetingForm({
               type="number"
               min="1"
               required
-              defaultValue={
-                meeting?.sacramentHymn.number ??
-                ""
-              }
+              defaultValue={meeting?.sacramentHymn.number ?? ""}
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
           </div>
@@ -443,10 +377,7 @@ export default function MeetingForm({
               name="sacramentHymnTitle"
               type="text"
               required
-              defaultValue={
-                meeting?.sacramentHymn.title ??
-                ""
-              }
+              defaultValue={meeting?.sacramentHymn.title ?? ""}
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
           </div>
@@ -458,21 +389,16 @@ export default function MeetingForm({
       ========================================= */}
 
       <section className="space-y-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">
-          Speakers
-        </h2>
+        <h2 className="text-xl font-semibold text-gray-900">Speakers</h2>
 
         <p className="text-sm text-gray-500">
-          Speaker management can be expanded here
-          as a dynamic field collection.
+          Speaker management can be expanded here as a dynamic field collection.
         </p>
 
         <input
           type="hidden"
           name="speakers"
-          value={JSON.stringify(
-            meeting?.speakers ?? [],
-          )}
+          value={JSON.stringify(meeting?.speakers ?? [])}
         />
       </section>
 
@@ -481,9 +407,7 @@ export default function MeetingForm({
       ========================================= */}
 
       <section className="space-y-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">
-          Closing
-        </h2>
+        <h2 className="text-xl font-semibold text-gray-900">Closing</h2>
 
         <div className="grid gap-6 md:grid-cols-2">
           <div>
@@ -500,9 +424,7 @@ export default function MeetingForm({
               type="number"
               min="1"
               required
-              defaultValue={
-                meeting?.closingHymn.number ?? ""
-              }
+              defaultValue={meeting?.closingHymn.number ?? ""}
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
           </div>
@@ -520,9 +442,7 @@ export default function MeetingForm({
               name="closingHymnTitle"
               type="text"
               required
-              defaultValue={
-                meeting?.closingHymn.title ?? ""
-              }
+              defaultValue={meeting?.closingHymn.title ?? ""}
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
           </div>
@@ -540,9 +460,7 @@ export default function MeetingForm({
               name="closingPrayer"
               type="text"
               required
-              defaultValue={
-                meeting?.closingPrayer ?? ""
-              }
+              defaultValue={meeting?.closingPrayer ?? ""}
               aria-describedby="closingPrayer-error"
               className="w-full rounded-lg border border-gray-300 px-3 py-2.5"
             />
@@ -552,9 +470,7 @@ export default function MeetingForm({
               aria-live="polite"
               className="mt-1 text-sm text-red-600"
             >
-              {state.errors?.closingPrayer?.join(
-                ", ",
-              )}
+              {state.errors?.closingPrayer?.join(", ")}
             </p>
           </div>
         </div>

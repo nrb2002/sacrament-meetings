@@ -5,9 +5,7 @@ interface RecentMeetingsProps {
   meetings: SacramentMeeting[];
 }
 
-export default function RecentMeetings({
-  meetings,
-}: RecentMeetingsProps) {
+export default function RecentMeetings({ meetings }: RecentMeetingsProps) {
   return (
     <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
       <div className="mb-5 flex items-center justify-between gap-4">
@@ -16,9 +14,7 @@ export default function RecentMeetings({
             Recent Meetings
           </h2>
 
-          <p className="text-sm text-gray-500">
-            Recently completed meetings.
-          </p>
+          <p className="text-sm text-gray-500">Recently completed meetings.</p>
         </div>
 
         <Link
@@ -31,9 +27,7 @@ export default function RecentMeetings({
 
       <div className="divide-y divide-gray-100">
         {meetings.length === 0 ? (
-          <p className="py-6 text-sm text-gray-500">
-            No past meetings found.
-          </p>
+          <p className="py-6 text-sm text-gray-500">No past meetings found.</p>
         ) : (
           meetings.map((meeting) => (
             <Link
@@ -47,13 +41,10 @@ export default function RecentMeetings({
                     {meeting.meetingType}
                   </p>
 
-                  <p className="text-sm text-gray-500">
-                    {meeting.date}
-                  </p>
+                  <p className="text-sm text-gray-500">{meeting.date}</p>
                 </div>
 
-                {meeting.attendance !==
-                  undefined &&
+                {meeting.attendance !== undefined &&
                   meeting.attendance !== null && (
                     <span className="text-sm text-gray-600">
                       {meeting.attendance} attendees

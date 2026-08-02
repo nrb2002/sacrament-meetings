@@ -4,9 +4,7 @@ interface DashboardStatsProps {
   stats: Stats;
 }
 
-export default function DashboardStats({
-  stats,
-}: DashboardStatsProps) {
+export default function DashboardStats({ stats }: DashboardStatsProps) {
   const cards = [
     {
       title: "Total Meetings",
@@ -25,8 +23,7 @@ export default function DashboardStats({
     },
     {
       title: "Average Attendance",
-      value:
-        stats.averageAttendance ?? "—",
+      value: stats.averageAttendance ?? "—",
       description: "Recorded attendance",
     },
   ];
@@ -41,17 +38,11 @@ export default function DashboardStats({
           key={card.title}
           className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
         >
-          <p className="text-sm font-medium text-gray-500">
-            {card.title}
-          </p>
+          <p className="text-sm font-medium text-gray-500">{card.title}</p>
 
-          <p className="mt-2 text-3xl font-bold text-gray-900">
-            {card.value}
-          </p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">{card.value}</p>
 
-          <p className="mt-1 text-sm text-gray-500">
-            {card.description}
-          </p>
+          <p className="mt-1 text-sm text-gray-500">{card.description}</p>
         </article>
       ))}
     </section>

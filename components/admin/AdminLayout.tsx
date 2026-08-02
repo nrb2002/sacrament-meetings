@@ -9,11 +9,8 @@ interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-export default function AdminLayout({
-  children,
-}: AdminLayoutProps) {
-  const [mobileOpen, setMobileOpen] =
-    useState(false);
+export default function AdminLayout({ children }: AdminLayoutProps) {
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -23,15 +20,9 @@ export default function AdminLayout({
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <AdminHeader
-          onMenuClick={() =>
-            setMobileOpen(true)
-          }
-        />
+        <AdminHeader onMenuClick={() => setMobileOpen(true)} />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
-          {children}
-        </main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

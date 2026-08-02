@@ -13,17 +13,13 @@ import {
 } from "@/lib/dashboard-db";
 
 export default async function AdminDashboardPage() {
-  const [
-    stats,
-    attendanceTrend,
-    recentMeetings,
-    upcomingMeetings,
-  ] = await Promise.all([
-    getMeetingStats(),
-    getAttendanceTrend(),
-    getRecentMeetings(),
-    getUpcomingMeetings(),
-  ]);
+  const [stats, attendanceTrend, recentMeetings, upcomingMeetings] =
+    await Promise.all([
+      getMeetingStats(),
+      getAttendanceTrend(),
+      getRecentMeetings(),
+      getUpcomingMeetings(),
+    ]);
 
   return (
     <div className="mx-auto w-full max-w-7xl space-y-8">
@@ -35,8 +31,8 @@ export default async function AdminDashboardPage() {
         </h1>
 
         <p className="mt-2 max-w-2xl text-sm text-gray-600 sm:text-base">
-          Manage sacrament meetings, review recent
-          activity, and monitor attendance.
+          Manage sacrament meetings, review recent activity, and monitor
+          attendance.
         </p>
       </section>
 

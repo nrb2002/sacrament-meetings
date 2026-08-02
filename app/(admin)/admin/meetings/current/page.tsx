@@ -1,0 +1,21 @@
+// app/meetings/current/page.tsx
+
+import { redirect } from "next/navigation";
+
+import EmptyState from "@/components/EmptyState";
+import { getCurrentMeeting } from "@/lib/meetings-db";
+
+export default async function CurrentMeetingPage() {
+  const meeting = await getCurrentMeeting();
+
+  if (!meeting) {
+    return (
+      <EmptyState
+        title="No Meeting Today"
+        message="There is no sacrament meeting scheduled for today."
+      />
+    );
+  }
+
+  redirect(`/admin/meetings/${meeting.id}`);
+}

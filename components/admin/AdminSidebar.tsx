@@ -10,19 +10,24 @@ const navigation = [
     icon: "⌂",
   },
   {
-    name: "All Meetings",
-    href: "/admin/meetings",
+    name: "Current Meeting",
+    href: "/admin/meetings/current",
     icon: "▣",
   },
   {
-    name: "Upcoming Meetings",
-    href: "/admin/meetings/upcoming",
+    name: "Future Meetings",
+    href: "/admin/meetings/future",
     icon: "◷",
   },
   {
     name: "Past Meetings",
     href: "/admin/meetings/past",
     icon: "✓",
+  },
+  {
+    name: "All Meetings",
+    href: "/admin/meetings",
+    icon: "▣",
   },
   {
     name: "Attendance",
@@ -70,18 +75,12 @@ export default function AdminSidebar({
       >
         {/* Logo */}
         <div className="flex h-20 items-center border-b border-gray-200 px-6">
-          <Link
-            href="/admin"
-            onClick={onClose}
-            className="flex flex-col"
-          >
+          <Link href="/admin" onClick={onClose} className="flex flex-col">
             <span className="text-lg font-bold text-sky-800">
               Sacrament Meeting
             </span>
 
-            <span className="text-sm text-gray-500">
-              Planner
-            </span>
+            <span className="text-sm text-gray-500">Planner</span>
           </Link>
         </div>
 
@@ -130,7 +129,6 @@ export default function AdminSidebar({
             className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-gray-600 transition hover:bg-gray-50 hover:text-gray-900"
           >
             <span className="text-lg">←</span>
-
             Back to Website
           </Link>
         </div>

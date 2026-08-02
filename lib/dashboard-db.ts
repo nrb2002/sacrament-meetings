@@ -4,7 +4,6 @@ import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.DATABASE_URL!);
 
-
 export interface DashboardStats {
   total: number;
   upcoming: number;
@@ -45,19 +44,15 @@ export async function getMeetingStats() {
     total: totalResult[0]?.count ?? 0,
     upcoming: upcomingResult[0]?.count ?? 0,
     past: pastResult[0]?.count ?? 0,
-    averageAttendance:
-      attendanceResult[0]?.average ?? 0,
+    averageAttendance: attendanceResult[0]?.average ?? 0,
   };
 }
-
 
 /* --------------------------------
    Recent Meetings
 -------------------------------- */
 
-export async function getRecentMeetings(
-  limit = 5,
-) {
+export async function getRecentMeetings(limit = 5) {
   const rows = await sql`
     SELECT
       id,
@@ -78,9 +73,7 @@ export async function getRecentMeetings(
    Upcoming Meetings
 -------------------------------- */
 
-export async function getUpcomingMeetings(
-  limit = 5,
-) {
+export async function getUpcomingMeetings(limit = 5) {
   const rows = await sql`
     SELECT
       id,
@@ -101,9 +94,7 @@ export async function getUpcomingMeetings(
    Attendance Trend
 -------------------------------- */
 
-export async function getAttendanceTrend(
-  limit = 12,
-) {
+export async function getAttendanceTrend(limit = 12) {
   const rows = await sql`
     SELECT
       id,
