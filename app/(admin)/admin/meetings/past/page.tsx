@@ -3,11 +3,13 @@
 import EmptyState from "@/components/EmptyState";
 import MeetingCard from "@/components/admin/AdminMeetingCard";
 import { MeetingSearch } from "@/components/meeting/MeetingSearch";
+import Pagination from "@/components/Pagination";
 
-import { getPastMeetings } from "@/lib/meetings-db";
+import { getPastMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
 
 export default async function PastMeetingsPage() {
   const meetings = await getPastMeetings();
+  const totalPages = await getMeetingsTotalPages();
 
   if (meetings.length === 0) {
     return (
@@ -28,6 +30,8 @@ export default async function PastMeetingsPage() {
           <MeetingCard key={meeting.id} meeting={meeting} />
         ))}
       </div>
+
+      {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </>
   );
 }
