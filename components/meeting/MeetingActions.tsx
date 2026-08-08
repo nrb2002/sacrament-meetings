@@ -1,19 +1,26 @@
 "use client";
 
-import { Download, Printer } from "lucide-react";
+import Link from "next/link";
+import { Printer, Pencil, Trash2 } from "lucide-react";
+import { deleteMeeting } from "@/lib/actions";
 
-export default function MeetingActions() {
+interface MeetingActionsProps {
+  meetingId: number;
+}
+
+export default function MeetingActions({
+  meetingId,
+}: MeetingActionsProps) {
   const handlePrint = () => {
     window.print();
   };
 
-  const handleDownload = () => {
-    alert("PDF download will be implemented in a future version.");
-  };
-
   return (
-    <div className="mb-6 flex justify-end gap-3">
+    <div className="mb-6 flex flex-wrap justify-end gap-3">
+      {/* Print */}
+
       <button
+        type="button"
         onClick={handlePrint}
         className="flex items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium shadow-sm transition hover:bg-gray-100"
       >
@@ -21,13 +28,36 @@ export default function MeetingActions() {
         Print
       </button>
 
-      <button
-        onClick={handleDownload}
-        className="flex items-center gap-2 rounded-md bg-sky-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-800"
+      {/* Edit */}
+
+      <Link
+        href={`/admin/meetings/${meetingId}/edit`}
+        className="flex items-center gap-2 rounded-md bg-sky-700 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
       >
-        <Download size={18} />
-        Download
-      </button>
+        <Pencil size={18} />
+        Edit Meeting
+      </Link>
+
+      {/* Delete */}
+
+      <form action={deleteMeeting.bind(null, meetingId)}>
+        <button
+          type="submit"
+          onClick={(e) => {
+            if (
+              !window.confirm(
+                "Are you sure you want to permanently delete this meeting?"
+              )
+            ) {
+              e.preventDefault();
+            }
+          }}
+          className="flex items-center gap-2 rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-red-700"
+        >
+          <Trash2 size={18} />
+          Delete
+        </button>
+      </form>
     </div>
   );
 }

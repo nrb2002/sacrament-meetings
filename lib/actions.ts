@@ -4,15 +4,52 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
 
 import {
   addMeeting,
   updateMeeting as updateMeetingInDb,
   deleteMeeting as deleteMeetingFromDb,
 } from "@/lib/meetings-db";
+import { signIn, signOut } from "@/auth";
+import { AuthError} from "next-auth";
 
 import { MeetingFormSchema } from "./meetings-schema";
 import { State } from "./action-types";
+
+/* --------------------------------
+Authenticate User/Login process
+-------------------------------- */
+async function requireAdminSession() {
+  const session = await auth();
+
+  if (!session?.user) {
+    throw new Error("Not authenticated");
+  }
+
+  return session;
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid email or password.";
+
+        default:
+          return "Something went wrong. Please try again.";
+      }
+    }
+
+    throw error;
+  }
+}
 
 /* --------------------------------
 Get Form Data
@@ -91,6 +128,7 @@ export async function createMeeting(
   prevState: State,
   formData: FormData,
 ): Promise<State> {
+  await requireAdminSession();
   let rawData;
 
   try {
@@ -136,6 +174,7 @@ export async function updateMeeting(
   prevState: State,
   formData: FormData,
 ): Promise<State> {
+  await requireAdminSession();
   let rawData;
 
   try {
@@ -185,6 +224,7 @@ DELETE MEETING
 -------------------------------- */
 
 export async function deleteMeeting(id: number) {
+  await requireAdminSession(); //Protecting the delete meeting route to only allow authenticated users to delete meetings
   let deleted: boolean;
 
   try {
@@ -208,3 +248,7 @@ export async function deleteMeeting(id: number) {
 
   redirect("/admin/meetings");
 }
+
+/**@abstract
+ * 
+ */

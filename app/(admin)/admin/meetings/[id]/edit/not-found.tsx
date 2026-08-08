@@ -13,7 +13,7 @@ export default function MeetingNotFound() {
       </p>
 
       <Link
-        href="/meetings"
+        href="/admin/meetings"
         className="rounded-md bg-blue-700 px-5 py-2.5 font-semibold text-white transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         Back to Meetings
