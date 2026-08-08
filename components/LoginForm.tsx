@@ -5,8 +5,10 @@ import { useActionState } from "react";
 import { authenticate } from "@/lib/actions";
 
 export default function LoginForm() {
-  const [errorMessage, formAction, isPending] =
-    useActionState(authenticate, undefined);
+  const [errorMessage, formAction, isPending] = useActionState(
+    authenticate,
+    undefined,
+  );
 
   return (
     <form action={formAction} className="space-y-6">
@@ -28,10 +30,7 @@ export default function LoginForm() {
           className="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none transition focus:border-sky-600 focus:ring-2 focus:ring-sky-200"
         />
 
-        <p
-          id="email-description"
-          className="mt-1 text-xs text-gray-500"
-        >
+        <p id="email-description" className="mt-1 text-xs text-gray-500">
           Enter your administrator email address.
         </p>
       </div>

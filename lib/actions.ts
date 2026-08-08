@@ -12,7 +12,7 @@ import {
   deleteMeeting as deleteMeetingFromDb,
 } from "@/lib/meetings-db";
 
-import { AuthError} from "next-auth";
+import { AuthError } from "next-auth";
 
 import { MeetingFormSchema } from "./meetings-schema";
 import { State } from "./action-types";
@@ -256,5 +256,5 @@ export async function deleteMeeting(id: number) {
 }
 
 /**@abstract
- * 
+ *
  */

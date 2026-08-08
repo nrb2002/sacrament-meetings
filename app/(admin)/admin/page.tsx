@@ -36,24 +36,6 @@ export default async function AdminDashboardPage() {
         </p>
       </section>
 
-      {/* Quick Actions */}
-
-      <section className="flex flex-col gap-3 sm:flex-row">
-        <Link
-          href="/admin/meetings/new"
-          className="rounded-lg bg-sky-700 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-sky-800"
-        >
-          Create New Meeting
-        </Link>
-
-        <Link
-          href="/admin/meetings"
-          className="rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
-        >
-          View All Meetings
-        </Link>
-      </section>
-
       {/* Statistics */}
 
       <DashboardStats stats={stats} />
@@ -68,6 +50,17 @@ export default async function AdminDashboardPage() {
         <RecentMeetings meetings={recentMeetings} />
 
         <UpcomingMeetings meetings={upcomingMeetings} />
+      </section>
+
+      {/* Quick Actions */}
+
+      <section className="flex flex-col gap-3 sm:flex-row">
+        <Link
+          href="/admin/meetings"
+          className="rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
+        >
+          View All Meetings
+        </Link>
       </section>
     </div>
   );

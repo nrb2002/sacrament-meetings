@@ -10,10 +10,7 @@ interface AdminLayoutProps {
   userName: string;
 }
 
-export default function AdminLayout({
-  children,
-  userName,
-}: AdminLayoutProps) {
+export default function AdminLayout({ children, userName }: AdminLayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -29,9 +26,7 @@ export default function AdminLayout({
           userName={userName}
         />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
-          {children}
-        </main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

@@ -8,9 +8,7 @@ interface MeetingActionsProps {
   meetingId: number;
 }
 
-export default function MeetingActions({
-  meetingId,
-}: MeetingActionsProps) {
+export default function MeetingActions({ meetingId }: MeetingActionsProps) {
   const handlePrint = () => {
     window.print();
   };
@@ -46,7 +44,7 @@ export default function MeetingActions({
           onClick={(e) => {
             if (
               !window.confirm(
-                "Are you sure you want to permanently delete this meeting?"
+                "Are you sure you want to permanently delete this meeting?",
               )
             ) {
               e.preventDefault();

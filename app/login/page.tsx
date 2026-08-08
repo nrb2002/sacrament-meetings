@@ -5,9 +5,7 @@ export default function LoginPage() {
     <main className="flex min-h-[70vh] items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Admin Sign In
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900">Admin Sign In</h1>
 
           <p className="mt-2 text-sm text-gray-600">
             Sign in to manage sacrament meetings.

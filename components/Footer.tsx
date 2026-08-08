@@ -12,8 +12,6 @@ export default function Footer() {
         >
           Login as an Administrator
         </Link>
-        
-
       </div>
       <div className="mx-auto max-w-6xl px-6 text-center text-sm text-gray-500">
         © {new Date().getFullYear()} Sacrament Meetings | Kasa-Vubu

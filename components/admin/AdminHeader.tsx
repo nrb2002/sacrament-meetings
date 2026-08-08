@@ -47,7 +47,6 @@ export default function AdminHeader({
 
       {/* Right side */}
       <div className="flex items-center gap-2 sm:gap-3">
-        
         {/* Create Meeting */}
         <Link
           href="/admin/meetings/new"

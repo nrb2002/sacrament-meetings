@@ -10,9 +10,5 @@ export default async function Layout({
 
   const userName = session?.user?.name ?? "Administrator";
 
-  return (
-    <AdminLayout userName={userName}>
-      {children}
-    </AdminLayout>
-  );
+  return <AdminLayout userName={userName}>{children}</AdminLayout>;
 }

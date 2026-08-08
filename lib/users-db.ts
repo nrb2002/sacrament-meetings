@@ -9,9 +9,7 @@ export interface User {
   passwordHash: string;
 }
 
-export async function getUserByEmail(
-  email: string,
-): Promise<User | null> {
+export async function getUserByEmail(email: string): Promise<User | null> {
   const rows = await sql`
     SELECT
       id,
@@ -25,6 +23,6 @@ export async function getUserByEmail(
 
   console.log("User found:", rows.length > 0);
   console.log("User data:", rows[0]);
-  
+
   return (rows[0] as User) ?? null;
 }
