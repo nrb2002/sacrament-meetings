@@ -91,6 +91,10 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
       <p className="mt-4">
         <strong>Closing Prayer:</strong> {meeting.closingPrayer}
       </p>
+      <p className="mt-4">
+      <strong>Attendance:</strong>{" "}
+        {meeting.attendance ?? "Not recorded"}
+      </p>
     </article>
   );
 }

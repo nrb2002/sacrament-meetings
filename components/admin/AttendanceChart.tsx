@@ -1,15 +1,20 @@
-import type { getAttendanceTrend } from "@/lib/dashboard-db";
+import type { AttendancePoint } from "@/lib/dashboard-db";
 
 interface AttendanceChartProps {
-  data: AttendanceTrend[];
+  data: AttendancePoint[];
 }
 
-export default function AttendanceChart({ data }: AttendanceChartProps) {
-  const maxAttendance = Math.max(...data.map((item) => item.attendance), 1);
+export default function AttendanceChart({
+  data,
+}: AttendanceChartProps) {
+  const maxAttendance = Math.max(
+    ...data.map((item) => item.attendance),
+    1,
+  );
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
-      <div className="mb-6">
+    <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <div className="mb-5">
         <h2 className="text-lg font-semibold text-gray-900">
           Attendance Trend
         </h2>
@@ -34,7 +39,7 @@ export default function AttendanceChart({ data }: AttendanceChartProps) {
 
               return (
                 <div
-                  key={item.date}
+                  key={item.id}
                   className="flex min-w-12 flex-1 flex-col items-center justify-end gap-2"
                 >
                   <span className="text-xs font-medium text-gray-600">
@@ -52,13 +57,12 @@ export default function AttendanceChart({ data }: AttendanceChartProps) {
                   </div>
 
                   <span className="text-xs text-gray-500">
-                    {new Date(`${item.date}T00:00:00`).toLocaleDateString(
-                      "en-US",
-                      {
-                        month: "short",
-                        day: "numeric",
-                      },
-                    )}
+                    {new Date(
+                      `${item.date}T00:00:00`,
+                    ).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
                   </span>
                 </div>
               );

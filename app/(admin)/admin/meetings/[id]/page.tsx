@@ -24,7 +24,7 @@ export default async function MeetingPage({ params }: PageProps) {
 
   return (
     <>
-      <MeetingActions />
+      <MeetingActions meetingId={meeting.id} />
       <MeetingDetail meeting={meeting} />
     </>
   );

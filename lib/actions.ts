@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "@/auth";
 
+
 import {
   addMeeting,
   updateMeeting as updateMeetingInDb,
@@ -228,9 +229,9 @@ export async function updateMeeting(
 /* --------------------------------
 DELETE MEETING
 -------------------------------- */
-
 export async function deleteMeeting(id: number) {
-  await requireAdminSession(); //Protecting the delete meeting route to only allow authenticated users to delete meetings
+  await requireAdminSession();
+
   let deleted: boolean;
 
   try {
@@ -238,14 +239,13 @@ export async function deleteMeeting(id: number) {
   } catch (error) {
     console.error("Failed to delete meeting:", error);
 
-    throw new Error("Unable to delete the meeting. Please try again.");
+    throw new Error(
+      "Unable to delete the meeting. Please try again.",
+    );
   }
 
   if (!deleted) {
-    return {
-      success: false,
-      message: "Meeting not found.",
-    };
+    throw new Error("Meeting not found.");
   }
 
   revalidatePath("/meetings");
@@ -254,7 +254,3 @@ export async function deleteMeeting(id: number) {
 
   redirect("/admin/meetings");
 }
-
-/**@abstract
- *
- */

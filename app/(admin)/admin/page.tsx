@@ -13,18 +13,21 @@ import {
 } from "@/lib/dashboard-db";
 
 export default async function AdminDashboardPage() {
-  const [stats, attendanceTrend, recentMeetings, upcomingMeetings] =
-    await Promise.all([
-      getMeetingStats(),
-      getAttendanceTrend(),
-      getRecentMeetings(),
-      getUpcomingMeetings(),
-    ]);
+  const [
+    stats,
+    attendanceTrend,
+    recentMeetings,
+    upcomingMeetings,
+  ] = await Promise.all([
+    getMeetingStats(),
+    getAttendanceTrend(),
+    getRecentMeetings(),
+    getUpcomingMeetings(),
+  ]);
 
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-8">
+    <div className="space-y-8">
       {/* Dashboard Header */}
-
       <section>
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           Dashboard
@@ -37,15 +40,12 @@ export default async function AdminDashboardPage() {
       </section>
 
       {/* Statistics */}
-
       <DashboardStats stats={stats} />
 
       {/* Attendance */}
-
       <AttendanceChart data={attendanceTrend} />
 
       {/* Recent and Upcoming */}
-
       <section className="grid gap-6 xl:grid-cols-2">
         <RecentMeetings meetings={recentMeetings} />
 
@@ -53,7 +53,6 @@ export default async function AdminDashboardPage() {
       </section>
 
       {/* Quick Actions */}
-
       <section className="flex flex-col gap-3 sm:flex-row">
         <Link
           href="/admin/meetings"

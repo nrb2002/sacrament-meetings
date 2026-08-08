@@ -1,20 +1,24 @@
 import Link from "next/link";
-import type { SacramentMeeting } from "@/lib/types";
+import type { DashboardMeeting } from "@/lib/dashboard-db";
 
 interface RecentMeetingsProps {
-  meetings: SacramentMeeting[];
+  meetings: DashboardMeeting[];
 }
 
-export default function RecentMeetings({ meetings }: RecentMeetingsProps) {
+export default function RecentMeetings({
+  meetings,
+}: RecentMeetingsProps) {
   return (
     <section className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-      <div className="mb-5 flex items-center justify-between gap-4">
+      <div className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-900">
             Recent Meetings
           </h2>
 
-          <p className="text-sm text-gray-500">Recently completed meetings.</p>
+          <p className="text-sm text-gray-500">
+            Recently completed meetings.
+          </p>
         </div>
 
         <Link
@@ -27,7 +31,9 @@ export default function RecentMeetings({ meetings }: RecentMeetingsProps) {
 
       <div className="divide-y divide-gray-100">
         {meetings.length === 0 ? (
-          <p className="py-6 text-sm text-gray-500">No past meetings found.</p>
+          <p className="py-6 text-sm text-gray-500">
+            No past meetings found.
+          </p>
         ) : (
           meetings.map((meeting) => (
             <Link
@@ -41,15 +47,14 @@ export default function RecentMeetings({ meetings }: RecentMeetingsProps) {
                     {meeting.meetingType}
                   </p>
 
-                  <p className="text-sm text-gray-500">{meeting.date}</p>
+                  <p className="text-sm text-gray-500">
+                    {meeting.date}
+                  </p>
                 </div>
 
-                {meeting.attendance !== undefined &&
-                  meeting.attendance !== null && (
-                    <span className="text-sm text-gray-600">
-                      {meeting.attendance} attendees
-                    </span>
-                  )}
+                <span className="text-sm text-gray-600">
+                  {meeting.attendance ?? "Not recorded"}
+                </span>
               </div>
             </Link>
           ))

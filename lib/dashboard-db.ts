@@ -1,5 +1,3 @@
-// lib/dashboard-db.ts
-
 import { neon } from "@neondatabase/serverless";
 
 const sql = neon(process.env.DATABASE_URL!);
@@ -11,11 +9,26 @@ export interface DashboardStats {
   averageAttendance: number;
 }
 
+export interface DashboardMeeting {
+  id: number;
+  date: string;
+  meetingType: string;
+  presiding: string;
+  conducting: string;
+  attendance?: number | null;
+}
+
+export interface AttendancePoint {
+  id: number;
+  date: string;
+  attendance: number;
+}
+
 /* --------------------------------
    Dashboard Statistics
 -------------------------------- */
 
-export async function getMeetingStats() {
+export async function getMeetingStats(): Promise<DashboardStats> {
   const totalResult = await sql`
     SELECT COUNT(*)::int AS count
     FROM meetings
@@ -52,49 +65,57 @@ export async function getMeetingStats() {
    Recent Meetings
 -------------------------------- */
 
-export async function getRecentMeetings(limit = 5) {
+export async function getRecentMeetings(
+  limit = 6,
+): Promise<DashboardMeeting[]> {
   const rows = await sql`
     SELECT
       id,
       to_char(date, 'YYYY-MM-DD') AS "date",
       meeting_type AS "meetingType",
-      presiding AS "presiding",
-      conducting AS "conducting"
+      presiding,
+      conducting,
+      attendance
     FROM meetings
     WHERE date < CURRENT_DATE
     ORDER BY date DESC
     LIMIT ${limit}
   `;
 
-  return rows;
+  return rows as DashboardMeeting[];
 }
 
 /* --------------------------------
    Upcoming Meetings
 -------------------------------- */
 
-export async function getUpcomingMeetings(limit = 5) {
+export async function getUpcomingMeetings(
+  limit = 6,
+): Promise<DashboardMeeting[]> {
   const rows = await sql`
     SELECT
       id,
       to_char(date, 'YYYY-MM-DD') AS "date",
       meeting_type AS "meetingType",
-      presiding AS "presiding",
-      conducting AS "conducting"
+      presiding,
+      conducting,
+      attendance
     FROM meetings
     WHERE date >= CURRENT_DATE
     ORDER BY date ASC
     LIMIT ${limit}
   `;
 
-  return rows;
+  return rows as DashboardMeeting[];
 }
 
 /* --------------------------------
    Attendance Trend
 -------------------------------- */
 
-export async function getAttendanceTrend(limit = 12) {
+export async function getAttendanceTrend(
+  limit = 12,
+): Promise<AttendancePoint[]> {
   const rows = await sql`
     SELECT
       id,
@@ -106,5 +127,5 @@ export async function getAttendanceTrend(limit = 12) {
     LIMIT ${limit}
   `;
 
-  return rows.reverse();
+  return rows.reverse() as AttendancePoint[];
 }
