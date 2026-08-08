@@ -1,8 +1,20 @@
 // components/Header.tsx
 
+import Link from "next/dist/client/link";
+
 export default function Footer() {
   return (
     <footer className="border-t bg-white py-6">
+      <div className="mx-auto mb-4 flex max-w-6xl items-center justify-center gap-4 px-6">
+        <Link
+          href="/login"
+          className="text-sm text-gray-500 transition hover:text-sky-700"
+        >
+          Login as an Administrator
+        </Link>
+        
+
+      </div>
       <div className="mx-auto max-w-6xl px-6 text-center text-sm text-gray-500">
         © {new Date().getFullYear()} Sacrament Meetings | Kasa-Vubu
         Ward/Kinshasa Stake - Democratic Republic of Congo

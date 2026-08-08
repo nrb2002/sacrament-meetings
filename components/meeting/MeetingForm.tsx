@@ -500,7 +500,7 @@ export default function MeetingForm({ meeting }: MeetingFormProps) {
               : "Creating Meeting..."
             : isEditMode
               ? "Save Changes"
-              : "Create Meeting"}
+              : "Save"}
         </button>
       </div>
     </form>

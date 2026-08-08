@@ -4,14 +4,14 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { auth } from "@/auth";
+import { auth, signIn, signOut } from "@/auth";
 
 import {
   addMeeting,
   updateMeeting as updateMeetingInDb,
   deleteMeeting as deleteMeetingFromDb,
 } from "@/lib/meetings-db";
-import { signIn, signOut } from "@/auth";
+
 import { AuthError} from "next-auth";
 
 import { MeetingFormSchema } from "./meetings-schema";
@@ -49,6 +49,12 @@ export async function authenticate(
 
     throw error;
   }
+}
+
+export async function signOutUser() {
+  await signOut({
+    redirectTo: "/login",
+  });
 }
 
 /* --------------------------------

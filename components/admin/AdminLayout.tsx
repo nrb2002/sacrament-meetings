@@ -7,9 +7,13 @@ import AdminSidebar from "./AdminSidebar";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
+  userName: string;
 }
 
-export default function AdminLayout({ children }: AdminLayoutProps) {
+export default function AdminLayout({
+  children,
+  userName,
+}: AdminLayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -20,9 +24,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <AdminHeader onMenuClick={() => setMobileOpen(true)} />
+        <AdminHeader
+          onMenuClick={() => setMobileOpen(true)}
+          userName={userName}
+        />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
       </div>
     </div>
   );
