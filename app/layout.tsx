@@ -20,8 +20,13 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Sacrament Meetings",
-  description: "Sacrament meeting agenda and program",
+  title: {
+    default: "Sacrament Meetings | Kasa-Vubu Ward",
+    template: "%s | Sacrament Meetings",
+  },
+  description:
+    "Sacrament meeting plans, schedules, speakers, hymns, and announcements for Kasa-Vubu Ward.",
+  metadataBase: new URL("https://sacrament-meetings-dzfu.vercel.app/"),
 };
 
 export default function RootLayout({
